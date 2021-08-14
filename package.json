@@ -1,0 +1,26 @@
+{
+  "name": "fullstack_boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server.js",
+    "knex:make": "knex migrate:make --knexfile ./knexfile.js",
+    "knex:migrate": "knex migrate:latest --knexfile ./knexfile.js",
+    "knex:rollback": "knex migrate:rollback --knexfile ./knexfile.js",
+    "knex:seed": "knex seed:run --knexfile ./knexfile.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.21",
+    "nodemon": "^2.0.12",
+    "pg": "^8.7.1",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
+  }
+}
