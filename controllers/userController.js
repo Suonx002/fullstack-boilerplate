@@ -1,6 +1,8 @@
 const db = require('../models/usersModel');
 
 const AppError = require('../utils/AppError');
+const permissions = require('../middlewares/permissions');
+const bcryptMethods = require('../utils/bcryptMethods');
 
 exports.get = async (req, res, next) => {
 	const { id } = req.params;
@@ -28,18 +30,24 @@ exports.create = async (req, res, next) => {
 		return next(new AppError(`This account is already existed.`, 400));
 	}
 
+	const hashedPassword = await bcryptMethods.hashPassword(password);
+
 	const newUser = await db.create({
 		email,
-
 		firstName,
 		lastName,
-		password,
+		password: hashedPassword,
 	});
 
-	const { password: newPassword, updatedAt, ...rest } = newUser[0];
+	console.log({ newUser });
+
+	const { password: newPassword, ...rest } = newUser[0];
+
+	const token = permissions.signJwtToken(email);
 
 	return res.status(201).json({
 		status: 'success',
+		token,
 		data: rest,
 	});
 };
@@ -53,12 +61,22 @@ exports.login = async (req, res, next) => {
 		return next(new AppError(`This account is already existed.`, 400));
 	}
 
-	if (password !== userData[0].password) {
+	const comparedPassword = await bcryptMethods.verifyPassword(
+		password,
+		userData[0]?.password
+	);
+
+	if (!comparedPassword) {
 		return next(new AppError(`Invalid Credentials`, 401));
 	}
 
+	const { password: hashedPassword, ...rest } = userData[0];
+
+	const token = permissions.signJwtToken(email);
+
 	return res.status(200).json({
 		status: 'success',
-		data: userData[0],
+		token,
+		data: rest,
 	});
 };
