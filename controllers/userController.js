@@ -80,3 +80,25 @@ exports.login = async (req, res, next) => {
 		data: rest,
 	});
 };
+
+exports.getAll = async (req, res, next) => {
+	const allUsers = await db.getAll();
+
+	console.log({ allUsers });
+
+	return res.status(200).json({
+		status: 'success',
+		data: allUsers,
+	});
+};
+
+exports.delete = async (req, res, next) => {
+	const { id } = req.params;
+
+	await db.delete(id);
+
+	return res.status(200).json({
+		status: 'success',
+		message: `Successfully deleted user ${id}`,
+	});
+};

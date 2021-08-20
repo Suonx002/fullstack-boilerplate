@@ -7,7 +7,7 @@ const dotenv = require('dotenv').config({
 
 // connect to database
 const db = require('./database/db');
-
+const AppError = require('./utils/AppError');
 const globalErrorHandlers = require('./controllers/errorController');
 const apiRouters = require('./api');
 

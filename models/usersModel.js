@@ -14,6 +14,20 @@ exports.get = async (id, email) => {
 	return user;
 };
 
+exports.getAll = async () => {
+	const allUsers = await db(tableNames.users).select(
+		'id',
+		'email',
+		'firstName',
+		'lastName',
+		'role',
+		'createdAt',
+		'updatedAt'
+	);
+
+	return allUsers;
+};
+
 exports.create = async (userData) => {
 	const id = uuidv4();
 
@@ -22,4 +36,8 @@ exports.create = async (userData) => {
 		.returning('*');
 
 	return newUser;
+};
+
+exports.delete = async (id) => {
+	return await db(tableNames.users).where('id', id).delete();
 };
