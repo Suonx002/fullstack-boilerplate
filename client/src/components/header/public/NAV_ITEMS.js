@@ -21,6 +21,18 @@ const NAV_ITEMS = [
 				label: 'Job Board',
 				subLabel: 'Find your dream design job',
 				href: '#',
+				children: [
+					{
+						label: 'Job Board 22',
+						subLabel: 'Find your dream design job 222',
+						href: '#',
+					},
+					{
+						label: 'Job Board 33',
+						subLabel: 'Find your dream design job 333',
+						href: '#',
+					},
+				],
 			},
 			{
 				label: 'Freelance Projects',

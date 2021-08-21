@@ -16,7 +16,7 @@ import NAV_ITEMS from './NAV_ITEMS';
 
 const DesktopNav = () => {
 	const linkColor = useColorModeValue('gray.600', 'gray.200');
-	const linkHoverColor = useColorModeValue('gray.800', 'white');
+	const linkHoverColor = useColorModeValue('gray.600', 'white');
 	const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
 	return (
@@ -39,7 +39,7 @@ const DesktopNav = () => {
 							</Link>
 						</PopoverTrigger>
 
-						{navItem.children && (
+						{navItem?.children && (
 							<PopoverContent
 								border={0}
 								boxShadow={'xl'}
@@ -48,7 +48,7 @@ const DesktopNav = () => {
 								rounded={'xl'}
 								minW={'sm'}>
 								<Stack>
-									{navItem.children.map((child) => (
+									{navItem?.children.map((child) => (
 										<DesktopSubNav key={child.label} {...child} />
 									))}
 								</Stack>

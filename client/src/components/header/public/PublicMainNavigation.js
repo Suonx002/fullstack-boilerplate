@@ -32,6 +32,7 @@ const PublicMainNavigation = () => {
 				borderStyle={'solid'}
 				borderColor={useColorModeValue('gray.200', 'gray.900')}
 				align={'center'}>
+				{/* mobile menu icon */}
 				<Flex
 					flex={{ base: 1, md: 'auto' }}
 					ml={{ base: -2 }}
@@ -43,6 +44,7 @@ const PublicMainNavigation = () => {
 						aria-label={'Toggle Navigation'}
 					/>
 				</Flex>
+				{/* Logo goes here */}
 				<Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
 					<Text
 						textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
@@ -51,6 +53,7 @@ const PublicMainNavigation = () => {
 						Logo
 					</Text>
 
+					{/* Menu items goes here */}
 					<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 						<DesktopNav />
 					</Flex>
@@ -74,10 +77,10 @@ const PublicMainNavigation = () => {
 						fontSize={'sm'}
 						fontWeight={600}
 						color={'white'}
-						bg={'pink.400'}
+						bg={'blue.400'}
 						href={'#'}
 						_hover={{
-							bg: 'pink.300',
+							bg: 'blue.300',
 						}}>
 						Sign Up
 					</Button>

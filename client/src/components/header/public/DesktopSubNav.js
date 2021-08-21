@@ -20,18 +20,18 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 			display={'block'}
 			p={2}
 			rounded={'md'}
-			_hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+			_hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}>
 			<Stack direction={'row'} align={'center'}>
 				<Box>
 					<Text
 						transition={'all .3s ease'}
-						_groupHover={{ color: 'pink.400' }}
+						_groupHover={{ color: 'blue.400' }}
 						fontWeight={500}>
 						{label}
 					</Text>
 					<Text fontSize={'sm'}>{subLabel}</Text>
 				</Box>
-				<Flex
+				{/* <Flex
 					transition={'all .3s ease'}
 					transform={'translateX(-10px)'}
 					opacity={0}
@@ -39,8 +39,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 					justify={'flex-end'}
 					align={'center'}
 					flex={1}>
-					<Icon color={'pink.400'} w={5} h={5} as={FiChevronRight} />
-				</Flex>
+					{<Icon color={'blue.400'} w={5} h={5} as={FiChevronRight} />}
+				</Flex> */}
 			</Stack>
 		</Link>
 	);
