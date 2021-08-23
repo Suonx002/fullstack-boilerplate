@@ -83,11 +83,19 @@ const MobileNav = ({ onOpen, ...rest }) => {
 						<MenuList
 							bg={useColorModeValue('white', 'gray.900')}
 							borderColor={useColorModeValue('gray.200', 'gray.700')}>
-							<MenuItem>Profile</MenuItem>
-							<MenuItem>Settings</MenuItem>
-							<MenuItem>Billing</MenuItem>
+							<MenuItem _focus={{ bg: 'blue.400', color: 'white' }}>
+								Profile
+							</MenuItem>
+							<MenuItem _focus={{ bg: 'blue.400', color: 'white' }}>
+								Settings
+							</MenuItem>
+							<MenuItem _focus={{ bg: 'blue.400', color: 'white' }}>
+								Billing
+							</MenuItem>
 							<MenuDivider />
-							<MenuItem>Sign out</MenuItem>
+							<MenuItem _focus={{ bg: 'blue.400', color: 'white' }}>
+								Sign out
+							</MenuItem>
 						</MenuList>
 					</Menu>
 				</Flex>

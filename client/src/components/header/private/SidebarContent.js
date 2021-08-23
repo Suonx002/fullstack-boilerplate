@@ -6,22 +6,10 @@ import {
 	useColorModeValue,
 	Text,
 } from '@chakra-ui/react';
-import {
-	FiHome,
-	FiTrendingUp,
-	FiCompass,
-	FiStar,
-	FiSettings,
-} from 'react-icons/fi';
+
 import NavItem from './NavItem';
 
-const LinkItems = [
-	{ name: 'Home', icon: FiHome },
-	{ name: 'Trending', icon: FiTrendingUp },
-	{ name: 'Explore', icon: FiCompass },
-	{ name: 'Favourites', icon: FiStar },
-	{ name: 'Settings', icon: FiSettings },
-];
+import SIDEBAR_MENU_ITEMS from './SIDEBAR_MENU_ITEMS';
 
 // Sidebar Drawer on the left
 const SidebarContent = ({ onClose, ...rest }) => {
@@ -41,8 +29,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
 				</Text>
 				<CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
 			</Flex>
-			{LinkItems.map((link) => (
-				<NavItem key={link.name} icon={link.icon}>
+			{SIDEBAR_MENU_ITEMS.map((link) => (
+				<NavItem key={link.name} icon={link.icon} href={`${link.link}`}>
 					{link.name}
 				</NavItem>
 			))}
