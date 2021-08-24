@@ -7,6 +7,7 @@ import {
 	Th,
 	Td,
 	Tfoot,
+	Text,
 	Flex,
 	Box,
 	HStack,
@@ -14,7 +15,8 @@ import {
 	Heading,
 	Button,
 	Icon,
-	Checkbox,
+	IconButton,
+	Tooltip,
 } from '@chakra-ui/react';
 
 import {
@@ -25,11 +27,18 @@ import {
 	useRowSelect,
 } from 'react-table';
 
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import {
+	FiChevronDown,
+	FiChevronUp,
+	FiEdit,
+	FiX,
+	FiMail,
+} from 'react-icons/fi';
 
 import HEADER_COLUMNS from './HEADER_COLUMNS';
 import TABLE_DATA from './TABLE_DATA';
 import FilterSearchBar from './FilterSearchBar';
+import MenuDropdown from './MenuDropdown';
 
 const TableList = () => {
 	const columns = useMemo(() => HEADER_COLUMNS, []);
@@ -55,7 +64,6 @@ const TableList = () => {
 		canPreviousPage,
 		pageOptions,
 		// selected row
-		selectedFlatRows,
 	} = useTable(
 		{
 			columns,
@@ -69,7 +77,7 @@ const TableList = () => {
 		useSortBy,
 		usePagination,
 		useRowSelect,
-		// adding checkbox columns
+		// custom hooks to add column for action btns
 		(hooks) => {
 			hooks.visibleColumns.push((columns) => [
 				...columns,
@@ -80,9 +88,55 @@ const TableList = () => {
 							Actions
 						</Th>
 					),
-					Cell: ({ row }) => (
-						<Checkbox {...row.getToggleAllRowsSelectedProps} />
-					),
+					Cell: ({ row }) => {
+						return (
+							<HStack>
+								<Tooltip label='Edit'>
+									<IconButton
+										variant='outline'
+										size='sm'
+										onClick={() => {
+											console.log({
+												row: row?.values,
+											});
+										}}>
+										<FiEdit fontSize={{ base: 14, md: 16 }} />
+									</IconButton>
+								</Tooltip>
+								<Tooltip label='Email'>
+									<IconButton
+										variant='outline'
+										size='sm'
+										onClick={() => {
+											window.open(
+												`mailto:${row?.values?.email || ''}?subject=${
+													row?.values?.fullName || ''
+												}`,
+												'_blank'
+											);
+
+											console.log({
+												row: row?.values,
+											});
+										}}>
+										<FiMail fontSize={{ base: 14, md: 16 }} />
+									</IconButton>
+								</Tooltip>
+								<Tooltip label='Delete'>
+									<IconButton
+										size='sm'
+										variant='outline'
+										onClick={() => {
+											console.log({
+												row: row?.values,
+											});
+										}}>
+										<FiX fontSize={{ base: 14, md: 16 }} />
+									</IconButton>
+								</Tooltip>
+							</HStack>
+						);
+					},
 				},
 			]);
 		}
@@ -90,22 +144,6 @@ const TableList = () => {
 
 	return (
 		<Box bg='whiteAlpha.900' p={8} borderRadius={4}>
-			<p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-			<pre>
-				<code>
-					{JSON.stringify(
-						{
-							selectedRowIds: selectedRowIds,
-							'selectedFlatRows[].original': selectedFlatRows.map(
-								(row) => row.original
-							),
-						},
-						null,
-						2
-					)}
-				</code>
-			</pre>
-
 			<Heading as='h2' size='lg' isTruncated>
 				Users
 			</Heading>
@@ -120,8 +158,6 @@ const TableList = () => {
 				borderColor='gray.100'
 				borderWidth={1}
 				borderRadius={4}>
-				<TableCaption>Total Users: {data?.length}</TableCaption>
-
 				<Thead bg='blue.400'>
 					{
 						// Loop over the header rows
@@ -194,28 +230,36 @@ const TableList = () => {
 						})
 					}
 				</Tbody>
-				<Tfoot _fullScreen>
-					<Flex p={5}>
-						<Box>
-							Page {pageIndex + 1} of {pageOptions?.length}
-						</Box>
-						<Box>
-							<Button
-								variant='outline'
-								onClick={previousPage}
-								isDisabled={!canPreviousPage}>
-								Previous
-							</Button>
-							<Button
-								variant='outline'
-								onClick={nextPage}
-								isDisabled={!canNextPage}>
-								Next
-							</Button>
-						</Box>
-					</Flex>
-				</Tfoot>
 			</Table>
+			<Flex justify='space-between' align='center' p={5}>
+				<HStack>
+					<Text fontSize='lg' mr={3}>
+						Total: {data?.length}
+					</Text>
+				</HStack>
+				<HStack>
+					<Text fontSize='lg'> Rows per page</Text>
+					<MenuDropdown />
+				</HStack>
+
+				<HStack>
+					<Button
+						variant='outline'
+						onClick={previousPage}
+						isDisabled={!canPreviousPage}>
+						Previous
+					</Button>
+					<Box>
+						{pageIndex + 1} of {pageOptions?.length}
+					</Box>
+					<Button
+						variant='outline'
+						onClick={nextPage}
+						isDisabled={!canNextPage}>
+						Next
+					</Button>
+				</HStack>
+			</Flex>
 
 			{/* ENDING TABLE */}
 		</Box>

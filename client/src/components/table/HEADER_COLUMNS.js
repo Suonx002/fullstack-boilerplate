@@ -12,8 +12,8 @@ const HEADER_COLUMNS = [
 		accessor: 'email', // accessor is the "key" in the data
 	},
 	{
-		Header: 'Plan',
-		accessor: 'plan', // accessor is the "key" in the data
+		Header: 'Permissions',
+		accessor: 'permission', // accessor is the "key" in the data
 	},
 	{
 		Header: 'Created At',
