@@ -8,12 +8,15 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 import theme from './theme/theme';
+import Scrollbar from './components/scrollbar/Scrollbar';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<ChakraProvider theme={theme}>
-				<App />
+				<Scrollbar>
+					<App />
+				</Scrollbar>
 			</ChakraProvider>
 		</BrowserRouter>
 	</React.StrictMode>,
