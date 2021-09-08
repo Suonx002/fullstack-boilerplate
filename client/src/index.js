@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, CSSReset } from '@chakra-ui/react';
 
 import './index.css';
+
+import 'focus-visible/dist/focus-visible';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import customTheme from './styles/customTheme';
@@ -12,6 +15,7 @@ import customTheme from './styles/customTheme';
 ReactDOM.render(
 	<React.StrictMode>
 		<ChakraProvider theme={customTheme}>
+			<CSSReset />
 			<BrowserRouter>
 				<App />
 			</BrowserRouter>
