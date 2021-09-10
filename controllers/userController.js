@@ -56,7 +56,7 @@ exports.login = async (req, res, next) => {
 	const userData = await db.get(null, email);
 
 	if (!userData?.length) {
-		return next(new AppError(`This account is already existed.`, 400));
+		return next(new AppError(`There is no account with this email.`, 400));
 	}
 
 	const comparedPassword = await bcryptMethods.verifyPassword(

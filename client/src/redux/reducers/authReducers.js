@@ -2,7 +2,7 @@
 
 import * as types from '../actions/auth/authTypes';
 
-const initialStates = {
+const initialState = {
 	isAuthenticated: true,
 	user: null,
 	token: null,
@@ -10,8 +10,8 @@ const initialStates = {
 	isLoading: true,
 };
 
-export default (state = initialStates, action) => {
-	switch (action) {
+export default (state = initialState, action) => {
+	switch (action.type) {
 		case types.LOGIN_SUCCESS:
 		case types.REGISTER_SUCCESS:
 		case types.IS_LOGGED_IN:

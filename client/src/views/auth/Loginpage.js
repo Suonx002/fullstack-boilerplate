@@ -12,6 +12,7 @@ import {
 	Text,
 	useColorModeValue,
 	FormErrorMessage,
+	useToast,
 } from '@chakra-ui/react';
 
 import { Link as LinkRouter } from 'react-router-dom';
@@ -19,7 +20,13 @@ import { Link as LinkRouter } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 
+import { useDispatch } from 'react-redux';
+import * as authActions from '../../redux/actions/auth/authActions';
+
 const LoginPage = () => {
+	const dispatch = useDispatch();
+	const toast = useToast();
+
 	const initialValues = {
 		email: '',
 		password: '',
@@ -43,7 +50,13 @@ const LoginPage = () => {
 		},
 	];
 
-	const onSubmit = async (values) => {};
+	const onSubmit = async (values) => {
+		const email = values?.email?.trim();
+		const password = values?.password?.trim();
+		const data = { email, password };
+
+		dispatch(authActions.loginUser(data, toast));
+	};
 
 	return (
 		<Flex

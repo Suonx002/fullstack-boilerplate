@@ -20,6 +20,7 @@ import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 
 import { useDispatch } from 'react-redux';
+import * as authActions from '../../redux/actions/auth/authActions';
 
 const RegisterPage = () => {
 	const toast = useToast();
@@ -80,6 +81,10 @@ const RegisterPage = () => {
 		const lastName = values?.lastName.trim() || '';
 		const email = values?.email.trim() || '';
 		const password = values?.password.trim() || '';
+
+		const data = { firstName, lastName, email, password };
+
+		dispatch(authActions.registerUser(data, toast));
 	};
 
 	return (
