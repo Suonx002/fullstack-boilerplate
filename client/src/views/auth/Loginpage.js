@@ -34,10 +34,12 @@ const LoginPage = () => {
 		{
 			name: 'email',
 			label: 'Email',
+			type: 'email',
 		},
 		{
 			name: 'password',
 			label: 'Password',
+			type: 'password',
 		},
 	];
 
@@ -72,7 +74,11 @@ const LoginPage = () => {
 														<FormLabel htmlFor={item.name}>
 															{item.label}
 														</FormLabel>
-														<Input {...field} id={item.name} />
+														<Input
+															{...field}
+															id={item.name}
+															type={item?.type}
+														/>
 														<FormErrorMessage>
 															{form.errors[item.name]}
 														</FormErrorMessage>

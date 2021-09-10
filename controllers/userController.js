@@ -39,8 +39,6 @@ exports.create = async (req, res, next) => {
 		password: hashedPassword,
 	});
 
-	console.log({ newUser });
-
 	const { password: newPassword, ...rest } = newUser[0];
 
 	const token = permissions.signJwtToken(email);

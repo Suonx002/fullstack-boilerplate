@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
+import { Provider } from 'react-redux';
 
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
 
@@ -12,14 +14,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import customTheme from './styles/customTheme';
 
+import store from './redux/store';
+
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
 ReactDOM.render(
 	<React.StrictMode>
-		<ChakraProvider theme={customTheme}>
-			<CSSReset />
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</ChakraProvider>
+		<Provider store={store}>
+			<ChakraProvider theme={customTheme}>
+				<CSSReset />
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</ChakraProvider>
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

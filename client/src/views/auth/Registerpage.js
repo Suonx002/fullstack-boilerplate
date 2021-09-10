@@ -12,49 +12,74 @@ import {
 	Text,
 	useColorModeValue,
 	FormErrorMessage,
+	useToast,
 } from '@chakra-ui/react';
 
 import { Link as LinkRouter } from 'react-router-dom';
-
 import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 
+import { useDispatch } from 'react-redux';
+
 const RegisterPage = () => {
+	const toast = useToast();
+
+	const dispatch = useDispatch();
+
 	const initialValues = {
-		fullName: '',
+		firstName: '',
+		lastName: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
 	};
 
 	const loginSchema = Yup.object().shape({
-		fullName: Yup.string().required().label('Full Name'),
-		email: Yup.string().email().required().label('Email'),
-		password: Yup.string().required().label('Password'),
-		confirmPassword: Yup.string().required().label('Confirm Password'),
+		firstName: Yup.string().min(2).required().label('First Name'),
+		lastName: Yup.string().min(2).required().label('Last Name'),
+		email: Yup.string().min(2).email().required().label('Email'),
+		password: Yup.string().min(5).max(50).required().label('Password'),
+		confirmPassword: Yup.string()
+			.min(5)
+			.max(50)
+			.oneOf([Yup.ref('password')], 'Password does not match')
+			.required('Password confirm is required')
+			.label('Confirm Password'),
 	});
 
 	const signupFields = [
 		{
-			name: 'fullName',
-			label: 'Full Name',
+			name: 'firstName',
+			label: 'First Name',
+			type: 'text',
+		},
+		{
+			name: 'lastName',
+			label: 'Last Name',
+			type: 'text',
 		},
 		{
 			name: 'email',
 			label: 'Email',
+			type: 'email',
 		},
 		{
 			name: 'password',
 			label: 'Password',
+			type: 'password',
 		},
 		{
 			name: 'confirmPassword',
 			label: 'Confirm Password',
+			type: 'password',
 		},
 	];
 
 	const onSubmit = async (values, { setSubmitting }) => {
-		setSubmitting(true);
+		const firstName = values?.firstName.trim() || '';
+		const lastName = values?.lastName.trim() || '';
+		const email = values?.email.trim() || '';
+		const password = values?.password.trim() || '';
 	};
 
 	return (
@@ -89,7 +114,11 @@ const RegisterPage = () => {
 															<FormLabel htmlFor={item.name}>
 																{item.label}
 															</FormLabel>
-															<Input {...field} id={item.name} />
+															<Input
+																{...field}
+																id={item.name}
+																type={item.type}
+															/>
 															<FormErrorMessage>
 																{form.errors[item.name]}
 															</FormErrorMessage>
