@@ -1,17 +1,28 @@
 import { Route, Switch } from 'react-router-dom';
 
+import PrivateRoutes from './PrivateRoutes';
+
 import homeRoutes from './homeRoutes';
 import authRoutes from './authRoutes';
 
 const MainRoutes = () => {
-	const publicRouteComponents = [...homeRoutes, ...authRoutes];
+	const allRouteComponents = [...homeRoutes, ...authRoutes];
 
 	return (
 		<Switch>
-			{publicRouteComponents?.length > 0 &&
-				publicRouteComponents.map(({ path, component }, index) => (
-					<Route exact path={path} component={component} key={index} />
-				))}
+			{allRouteComponents?.length > 0 &&
+				allRouteComponents.map(({ path, component, type = 'public' }, index) =>
+					type === 'private' ? (
+						<PrivateRoutes
+							exact
+							path={path}
+							component={component}
+							key={index}
+						/>
+					) : (
+						<Route exact path={path} component={component} key={index} />
+					)
+				)}
 		</Switch>
 	);
 };

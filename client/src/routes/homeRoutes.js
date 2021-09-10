@@ -4,6 +4,7 @@ const homeRoutes = [
 	{
 		path: '/',
 		component: Homepage,
+		type: 'private',
 	},
 ];
 

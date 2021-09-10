@@ -5,10 +5,12 @@ const authRoutes = [
 	{
 		path: '/login',
 		component: LoginPage,
+		type: 'public',
 	},
 	{
 		path: '/register',
 		component: RegisterPage,
+		type: 'public',
 	},
 ];
 
