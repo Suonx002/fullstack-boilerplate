@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
 	Flex,
 	Box,
@@ -15,17 +16,22 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter, useHistory } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../../redux/actions/auth/authActions';
 
 const LoginPage = () => {
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 	const dispatch = useDispatch();
+
 	const toast = useToast();
+	const history = useHistory();
 
 	const initialValues = {
 		email: '',
@@ -55,8 +61,14 @@ const LoginPage = () => {
 		const password = values?.password?.trim();
 		const data = { email, password };
 
-		dispatch(authActions.loginUser(data, toast));
+		dispatch(authActions.loginUser(data, toast, history));
 	};
+
+	useEffect(() => {
+		if (user) {
+			history.push('/');
+		}
+	}, []);
 
 	return (
 		<Flex

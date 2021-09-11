@@ -16,8 +16,6 @@ const App = () => {
 			dispatch(authActions.getAuthUser());
 		}
 
-		console.log('HOME PAGE FIRED');
-
 		//eslint-disable-next-line
 	}, []);
 

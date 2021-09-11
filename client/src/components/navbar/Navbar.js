@@ -14,6 +14,7 @@ import {
 	useBreakpointValue,
 	useDisclosure,
 	Link,
+	useToast,
 } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
 
@@ -23,9 +24,18 @@ import {
 	ChevronDownIcon,
 	ChevronRightIcon,
 } from '@chakra-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+
+import * as authActions from '../../redux/actions/auth/authActions';
 
 export default function Navbar() {
 	const { isOpen, onToggle } = useDisclosure();
+	const toast = useToast();
+
+	const dispatch = useDispatch();
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 
 	return (
 		<Box>
@@ -67,34 +77,57 @@ export default function Navbar() {
 					</Flex>
 				</Flex>
 
-				<Stack
-					flex={{ base: 1, md: 0 }}
-					justify={'flex-end'}
-					direction={'row'}
-					spacing={6}>
-					<Button
-						as={LinkRouter}
-						to='/login'
-						fontSize={'sm'}
-						fontWeight={400}
-						variant={'link'}>
-						Sign In
-					</Button>
-					<Button
-						as={LinkRouter}
-						to='/register'
-						display={{ base: 'none', md: 'inline-flex' }}
-						fontSize={'sm'}
-						fontWeight={600}
-						color={'white'}
-						bg={'blue.400'}
-						href={'#'}
-						_hover={{
-							bg: 'blue.300',
-						}}>
-						Sign Up
-					</Button>
-				</Stack>
+				{user ? (
+					<Stack
+						flex={{ base: 1, md: 0 }}
+						justify={'flex-end'}
+						direction={'row'}
+						spacing={6}>
+						<Button
+							as={'a'}
+							onClick={() => dispatch(authActions.logoutUser(toast))}
+							display={{ base: 'none', md: 'inline-flex' }}
+							fontSize={'sm'}
+							fontWeight={600}
+							color={'white'}
+							bg={'blue.400'}
+							href={'#'}
+							_hover={{
+								bg: 'blue.300',
+							}}>
+							Logout
+						</Button>
+					</Stack>
+				) : (
+					<Stack
+						flex={{ base: 1, md: 0 }}
+						justify={'flex-end'}
+						direction={'row'}
+						spacing={6}>
+						<Button
+							as={LinkRouter}
+							to='/login'
+							fontSize={'sm'}
+							fontWeight={400}
+							variant={'link'}>
+							Sign In
+						</Button>
+						<Button
+							as={LinkRouter}
+							to='/register'
+							display={{ base: 'none', md: 'inline-flex' }}
+							fontSize={'sm'}
+							fontWeight={600}
+							color={'white'}
+							bg={'blue.400'}
+							href={'#'}
+							_hover={{
+								bg: 'blue.300',
+							}}>
+							Sign Up
+						</Button>
+					</Stack>
+				)}
 			</Flex>
 
 			<Collapse in={isOpen} animateOpacity>

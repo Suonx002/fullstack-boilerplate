@@ -19,7 +19,7 @@ export const getAuthUser = () => async (dispatch) => {
 	}
 };
 
-export const loginUser = (data, toast) => async (dispatch) => {
+export const loginUser = (data, toast, history) => async (dispatch) => {
 	try {
 		const res = await axios.post('/users/login', data);
 		dispatch({
@@ -33,6 +33,8 @@ export const loginUser = (data, toast) => async (dispatch) => {
 			duration: 4000,
 			isClosable: true,
 		});
+
+		history.push('/');
 	} catch (err) {
 		console.log({ err });
 
@@ -58,7 +60,7 @@ export const loginUser = (data, toast) => async (dispatch) => {
 	}
 };
 
-export const registerUser = (data, toast) => async (dispatch) => {
+export const registerUser = (data, toast, history) => async (dispatch) => {
 	try {
 		const res = await axios.post('/users', data);
 		dispatch({
@@ -73,6 +75,8 @@ export const registerUser = (data, toast) => async (dispatch) => {
 			duration: 4000,
 			isClosable: true,
 		});
+
+		history.push('/');
 	} catch (err) {
 		dispatch({
 			type: types.REGISTER_FAILED,
@@ -94,4 +98,18 @@ export const registerUser = (data, toast) => async (dispatch) => {
 			isClosable: true,
 		});
 	}
+};
+
+export const logoutUser = (toast) => (dispatch) => {
+	dispatch({
+		type: types.LOGOUT,
+	});
+
+	toast({
+		title: 'Successfully logout!',
+		status: 'success',
+		position: 'top',
+		duration: 4000,
+		isClosable: true,
+	});
 };

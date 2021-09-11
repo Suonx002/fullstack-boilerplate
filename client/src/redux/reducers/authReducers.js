@@ -27,6 +27,7 @@ export default (state = initialState, action) => {
 		case types.LOGIN_FAILED:
 		case types.REGISTER_FAILED:
 		case types.AUTH_ERROR:
+		case types.LOGOUT:
 			localStorage.removeItem('jwtToken');
 			return {
 				...state,

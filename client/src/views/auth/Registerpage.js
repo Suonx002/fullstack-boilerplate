@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import {
 	Flex,
 	Box,
@@ -15,17 +16,21 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../../redux/actions/auth/authActions';
 
 const RegisterPage = () => {
 	const toast = useToast();
+	const history = useHistory();
 
 	const dispatch = useDispatch();
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 
 	const initialValues = {
 		firstName: '',
@@ -86,6 +91,12 @@ const RegisterPage = () => {
 
 		dispatch(authActions.registerUser(data, toast));
 	};
+
+	useEffect(() => {
+		if (user) {
+			history.push('/');
+		}
+	}, []);
 
 	return (
 		<Flex

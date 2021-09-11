@@ -5,9 +5,9 @@ import { Skeleton, Stack } from '@chakra-ui/react';
 const SkeletonLoading = () => {
 	return (
 		<Stack>
-			{Array(200)
+			{Array(100)
 				.fill()
-				.map((ellement, index) => (
+				.map((el, index) => (
 					<Skeleton height='20px' key={index} />
 				))}
 		</Stack>
