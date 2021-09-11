@@ -28,6 +28,7 @@ exports.privateRoute = catchAsync(async (req, res, next) => {
 	}
 
 	// check if token exist
+	console.log({ token });
 
 	if (!token) {
 		return next(new AppError('Please login again to get access!', 400));

@@ -19,7 +19,7 @@ exports.up = async (knex) =>
 		});
 		// user roles
 		table
-			.enum('role', ['user', 'basic', 'pro', 'enterprise'])
+			.enum('role', ['user', 'basic', 'pro', 'enterprise', 'admin'])
 			.defaultTo('user');
 
 		// adding default createdAt & updatedAt

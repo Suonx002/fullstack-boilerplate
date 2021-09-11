@@ -4,6 +4,13 @@ const AppError = require('../utils/AppError');
 const permissions = require('../middlewares/permissions');
 const bcryptMethods = require('../utils/bcryptMethods');
 
+exports.getMe = async (req, res, next) => {
+	return res.status(200).json({
+		status: 'success',
+		data: req.user,
+	});
+};
+
 exports.get = async (req, res, next) => {
 	const { id } = req.params;
 

@@ -1,4 +1,4 @@
-export const IS_LOGGED_IN = 'IS_LOGGED_IN';
+export const GET_AUTH_USER = 'GET_AUTH_USER';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

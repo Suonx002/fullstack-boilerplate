@@ -28,6 +28,10 @@ router
 	);
 
 router
+	.route('/me')
+	.get(permissions.privateRoute, catchAsync(userController.getMe));
+
+router
 	.route('/:id')
 	.get(catchAsync(userController.get))
 	.delete(

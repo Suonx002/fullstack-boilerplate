@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
+const ignoreFavicon = require('./middlewares/ignoreFavicon');
 
 const dotenv = require('dotenv').config({
 	path: path.resolve(__dirname + '/configs.env'),
@@ -14,9 +16,23 @@ const apiRouters = require('./api');
 
 const app = express();
 
+// app.use(ignoreFavicon);
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+if (process.env.NODE_ENV !== 'production') {
+	app.use(morgan('tiny'));
+}
+
+app.get('/', (req, res) => {
+	return res.status(200).json({
+		status: 'success',
+		message: 'Welcome to Full Stack Boilerplate',
+		techStack: 'React, Chakra UI, React-Redux, Node, Knex, and Postgres',
+	});
+});
 
 app.use('/api/v1', apiRouters);
 

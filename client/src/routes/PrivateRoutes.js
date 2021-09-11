@@ -8,13 +8,18 @@ const PrivateRoutes = ({ component: Component, ...rest }) => {
 	const { isAuthenticated, user } = useSelector((state) => state.auth);
 
 	const toast = useToast();
-	const PERMISSION_ACCESS = ['user', 'admin'];
 
 	return (
 		<Route
 			{...rest}
 			render={(props) => {
-				if (isAuthenticated && user && PERMISSION_ACCESS.includes(user.role)) {
+				const PERMISSION_ACCESS = ['user', 'admin'];
+				const isUserLoggedIn = localStorage?.jwtToken;
+
+				if (
+					isUserLoggedIn ||
+					(isAuthenticated && user && PERMISSION_ACCESS.includes(user.role))
+				) {
 					return <Component {...props} />;
 				}
 

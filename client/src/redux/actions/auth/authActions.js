@@ -1,5 +1,23 @@
 import axios from 'axios';
+import setAuthToken from '../../../utils/setAuthToken';
 import * as types from './authTypes';
+
+export const getAuthUser = () => async (dispatch) => {
+	try {
+		setAuthToken(localStorage.jwtToken);
+
+		const res = await axios.get('/users/me');
+		dispatch({
+			type: types.GET_AUTH_USER,
+			payload: res.data,
+		});
+	} catch (err) {
+		dispatch({
+			type: types.LOGIN_FAILED,
+			payload: 'Please login to access this page.',
+		});
+	}
+};
 
 export const loginUser = (data, toast) => async (dispatch) => {
 	try {

@@ -14,7 +14,8 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case types.LOGIN_SUCCESS:
 		case types.REGISTER_SUCCESS:
-		case types.IS_LOGGED_IN:
+		case types.GET_AUTH_USER:
+			localStorage.setItem('jwtToken', action.payload.token);
 			return {
 				...state,
 				user: action.payload.data,
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
 			};
 		case types.LOGIN_FAILED:
 		case types.REGISTER_FAILED:
+			localStorage.removeItem('jwtToken');
 			return {
 				...state,
 				user: null,
