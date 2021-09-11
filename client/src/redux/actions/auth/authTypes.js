@@ -1,4 +1,5 @@
 export const GET_AUTH_USER = 'GET_AUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

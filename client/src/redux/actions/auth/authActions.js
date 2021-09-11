@@ -13,7 +13,7 @@ export const getAuthUser = () => async (dispatch) => {
 		});
 	} catch (err) {
 		dispatch({
-			type: types.LOGIN_FAILED,
+			type: types.AUTH_ERROR,
 			payload: 'Please login to access this page.',
 		});
 	}

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import './index.css';
 
@@ -14,19 +15,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import customTheme from './styles/customTheme';
 
-import store from './redux/store';
+import { store, persistor } from './redux/store';
+import SkeletonLoading from './components/loading/SkeletonLoading';
+import setAuthToken from './utils/setAuthToken';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
+if (localStorage.jwtToken) {
+	setAuthToken(localStorage.jwtToken);
+}
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<ChakraProvider theme={customTheme}>
-				<CSSReset />
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
-			</ChakraProvider>
+			<PersistGate loading={SkeletonLoading} persistor={persistor}>
+				<ChakraProvider theme={customTheme}>
+					<CSSReset />
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
+				</ChakraProvider>
+			</PersistGate>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
