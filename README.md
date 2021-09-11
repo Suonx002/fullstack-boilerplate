@@ -12,26 +12,30 @@
 
 Please add a config.env at the top level of the folder next to server.js and provide the following info:
 
-<code>NODE_ENV=</code>
-<code>PORT=</code>
+```
+NODE_ENV=
+PORT=
 
-<code>LOCAL_DB_CLIENT=</code>
-<code>LOCAL_DB_HOST=</code>
-<code>LOCAL_DB_NAME=</code>
-<code>LOCAL_DB_USERNAME=</code>
-<code>LOCAL_DB_PASSWORD=</code>
+LOCAL_DB_CLIENT=
+LOCAL_DB_HOST=
+LOCAL_DB_NAME=
+LOCAL_DB_USERNAME=
+LOCAL_DB_PASSWORD=
 
-<code>STAGE_DB_CLIENT=</code>
-<code>STAGE_DATABASE_URL=</code>
+STAGE_DB_CLIENT=
+STAGE_DATABASE_URL=
 
-<code>PROD_DB_CLIENT=</code>
-<code>PROD_DATABASE_URL=</code>
+PROD_DB_CLIENT=
+PROD_DATABASE_URL=
 
-<code>JWT_EXPIRES_IN=</code>
-<code>JWT_SECRET=</code>
+JWT_EXPIRES_IN=
+JWT_SECRET=
+```
 
 ---
 
 In the client folder, please add .env.local next to src folder
 
-<code>REACT_APP_BASE_URL=http://localhost:5000/api/v1</code>
+```
+REACT_APP_BASE_URL=http://localhost:5000/api/v1
+```
