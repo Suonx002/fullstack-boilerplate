@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const ignoreFavicon = require('./middlewares/ignoreFavicon');
 
 const dotenv = require('dotenv').config({
 	path: path.resolve(__dirname + '/configs.env'),
@@ -15,8 +14,6 @@ const globalErrorHandlers = require('./controllers/errorController');
 const apiRouters = require('./api');
 
 const app = express();
-
-// app.use(ignoreFavicon);
 
 app.use(cors());
 app.use(express.json());
