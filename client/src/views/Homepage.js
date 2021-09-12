@@ -17,6 +17,8 @@ import { CheckIcon } from '@chakra-ui/icons';
 
 import { Link as LinkRouter } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 const featureList = [
 	{
 		title:
@@ -37,6 +39,9 @@ const featureList = [
 ];
 
 const Homepage = () => {
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 	return (
 		<Container maxW={'3xl'}>
 			<Stack
@@ -74,7 +79,7 @@ const Homepage = () => {
 					position={'relative'}>
 					<Button
 						as={LinkRouter}
-						to='/register'
+						to={user ? '/dashboard' : '/register'}
 						colorScheme={'blue'}
 						bg={'blue.400'}
 						rounded={'full'}
@@ -82,7 +87,7 @@ const Homepage = () => {
 						_hover={{
 							bg: 'blue.500',
 						}}>
-						Get Started
+						{user ? 'Dashboard' : 'Get Started'}
 					</Button>
 
 					<Box>
@@ -101,7 +106,7 @@ const Homepage = () => {
 							right={'-125px'}
 							top={'-15px'}
 							transform={'rotate(10deg)'}>
-							Starting for FREE!
+							{user ? 'View Dashboard' : 'Starting for FREE!'}
 						</Text>
 					</Box>
 				</Stack>

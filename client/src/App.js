@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import * as authActions from './redux/actions/auth/authActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import setAuthToken from './utils/setAuthToken';
+import * as authActions from './redux/actions/auth/authActions';
 
 import Navbar from './components/navbar/Navbar';
 import MainRoutes from './routes';
 
 const App = () => {
 	const dispatch = useDispatch();
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 
 	useEffect(() => {
 		if (localStorage.jwtToken) {
@@ -21,7 +24,7 @@ const App = () => {
 
 	return (
 		<>
-			<Navbar />
+			{!user && <Navbar />}
 			<MainRoutes />
 		</>
 	);

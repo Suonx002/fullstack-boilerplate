@@ -94,7 +94,7 @@ export default function Navbar() {
 						<Button
 							as={'a'}
 							onClick={() => dispatch(authActions.logoutUser(toast))}
-							display={{ base: 'none', md: 'inline-flex' }}
+							display={{ base: 'inline-flex' }}
 							fontSize={'sm'}
 							fontWeight={600}
 							color={'white'}
@@ -317,18 +317,19 @@ const MobileNavItem = ({ label, children, to, menuClose }) => {
 const NAV_ITEMS = [
 	{
 		label: 'Dashboard',
-		children: [
-			{
-				label: 'Login Page',
-				subLabel: 'Login page sample',
-				to: '/login',
-			},
-			{
-				label: 'Register Page',
-				subLabel: 'Register page sample',
-				to: '/register',
-			},
-		],
+		to: '/dashboard',
+		// children: [
+		// 	{
+		// 		label: 'Login Page',
+		// 		subLabel: 'Login page sample',
+		// 		to: '/login',
+		// 	},
+		// 	{
+		// 		label: 'Register Page',
+		// 		subLabel: 'Register page sample',
+		// 		to: '/register',
+		// 	},
+		// ],
 	},
 ];
 

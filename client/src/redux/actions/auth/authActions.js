@@ -34,7 +34,7 @@ export const loginUser = (data, toast, history) => async (dispatch) => {
 			isClosable: true,
 		});
 
-		history.push('/');
+		history.push('/dashboard');
 	} catch (err) {
 		dispatch({
 			type: types.LOGIN_FAILED,
