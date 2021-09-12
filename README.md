@@ -8,25 +8,6 @@
 - Knex.js
 - PostgreSQL
 
-const featureList = [
-{
-title:
-'Authenications with JSON Web Token for features such as register, login, forgot password, and reset password',
-},
-{
-title: 'Authorization access with public/private for both client & backend',
-},
-{
-title: 'State management are handle with Redux and redux persist',
-},
-{
-title: 'Password are encrypted with bcrypt',
-},
-{
-title: 'Mailgun for sending emails',
-},
-];
-
 ### Features
 
 - Authenications with JSON Web Token for features such as register, login, forgot password, and reset password
