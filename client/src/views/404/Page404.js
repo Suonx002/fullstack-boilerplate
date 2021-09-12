@@ -25,7 +25,11 @@ export default function Page404() {
 						fontWeight={600}
 						fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
 						lineHeight={'110%'}>
-						<Text as={'h1'} color={'black.400'} fontSize='100px' mb={5}>
+						<Text
+							as={'h1'}
+							color={'black.400'}
+							fontSize='100px'
+							mb={{ base: 12, sm: 8 }}>
 							404
 						</Text>
 						<Text as={'span'} color={'red.400'}>
