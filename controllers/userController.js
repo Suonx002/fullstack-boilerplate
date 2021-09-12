@@ -6,6 +6,8 @@ const permissions = require('../middlewares/permissions');
 const bcryptMethods = require('../utils/bcryptMethods');
 const sendEmail = require('../utils/emails/sendEmail');
 
+const resetPasswordTemplate = require('../utils/emails/templates/resetPasswordTemplate');
+
 exports.getMe = async (req, res, next) => {
 	return res.status(200).json({
 		status: 'success',
@@ -94,8 +96,6 @@ exports.login = async (req, res, next) => {
 exports.getAll = async (req, res, next) => {
 	const allUsers = await db.getAll();
 
-	console.log({ allUsers });
-
 	return res.status(200).json({
 		status: 'success',
 		data: allUsers,
@@ -137,11 +137,21 @@ exports.forgotPassword = async (req, res, next) => {
 		return next(new AppError(`There is no account with this email.`, 400));
 	}
 
+	await sendEmail({
+		to: email,
+		subject: 'Reset Your Password',
+		html: resetPasswordTemplate({
+			firstName: user[0]?.firstName,
+			heading: 'Reset Your Password',
+			description: `Please reset your password with the following link below.`,
+			websiteLabel: `Reset Password`,
+			websiteLink: `${process.env.CLIENT_URL}/resetPassword/${forgotPasswordToken}`,
+		}),
+	});
+
 	return res.status(200).json({
 		status: 'success',
 		message: `Password reset has been sent to your email!`,
-		forgotPasswordToken,
-		forgotPasswordTokenEncrypted,
 	});
 };
 

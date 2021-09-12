@@ -49,12 +49,6 @@ exports.forgotPassword = async (
 	forgotPasswordToken,
 	forgotPasswordTokenExpires
 ) => {
-	console.log({
-		email,
-		forgotPasswordToken,
-		forgotPasswordTokenExpires,
-	});
-
 	const user = await db(tableNames.users)
 		.where({ email })
 		.update({
@@ -62,8 +56,6 @@ exports.forgotPassword = async (
 			forgotPasswordTokenExpires,
 		})
 		.returning('*');
-
-	console.log({ user });
 
 	return user;
 };
@@ -83,8 +75,6 @@ exports.resetPassword = async (token, password) => {
 			passwordChangedAt: currentDate,
 		})
 		.returning('*');
-
-	console.log({ user });
 
 	return user;
 };

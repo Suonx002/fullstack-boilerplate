@@ -51,9 +51,7 @@ const ForgotPasswordPage = () => {
 
 	const onSubmit = async (values) => {
 		const email = values?.email?.trim();
-		const data = { email };
-
-		// dispatch(authActions.loginUser(data, toast, history));
+		dispatch(authActions.forgotPassword({ email }, toast));
 	};
 
 	useEffect(() => {

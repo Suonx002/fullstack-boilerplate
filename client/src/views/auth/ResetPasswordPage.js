@@ -16,7 +16,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 
-import { Link as LinkRouter, useHistory } from 'react-router-dom';
+import { Link as LinkRouter, useHistory, useParams } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
@@ -32,28 +32,40 @@ const ResetPasswordPage = () => {
 
 	const toast = useToast();
 	const history = useHistory();
+	const { token } = useParams();
 
 	const initialValues = {
-		email: '',
+		password: '',
+		confirmPassword: '',
 	};
 
 	const resetPasswordSchema = Yup.object().shape({
-		email: Yup.string().email().required().label('Email'),
+		password: Yup.string().min(5).max(50).required().label('Password'),
+		confirmPassword: Yup.string()
+			.min(5)
+			.max(50)
+			.oneOf([Yup.ref('password')], 'Password does not match')
+			.required('Password confirm is required')
+			.label('Confirm Password'),
 	});
 
 	const resetPasswordFields = [
 		{
-			name: 'email',
-			label: 'Email',
-			type: 'email',
+			name: 'password',
+			label: 'Password',
+			type: 'password',
+		},
+		{
+			name: 'confirmPassword',
+			label: 'Confirm Password',
+			type: 'password',
 		},
 	];
 
 	const onSubmit = async (values) => {
-		const email = values?.email?.trim();
-		const data = { email };
+		const password = values.password;
 
-		// dispatch(authActions.loginUser(data, toast, history));
+		dispatch(authActions.resetPassword({ password, token }, toast, history));
 	};
 
 	useEffect(() => {
@@ -70,7 +82,7 @@ const ResetPasswordPage = () => {
 			bg={useColorModeValue('gray.50', 'gray.800')}>
 			<Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
 				<Stack align={'center'}>
-					<Heading fontSize={'4xl'}>reset your password</Heading>
+					<Heading fontSize={'4xl'}>Reset your password</Heading>
 				</Stack>
 				<Formik
 					initialValues={initialValues}
@@ -113,7 +125,7 @@ const ResetPasswordPage = () => {
 											_hover={{
 												bg: 'blue.500',
 											}}>
-											Send Reset Link
+											Update Password
 										</Button>
 									</Stack>
 								</Stack>

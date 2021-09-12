@@ -36,8 +36,6 @@ export const loginUser = (data, toast, history) => async (dispatch) => {
 
 		history.push('/');
 	} catch (err) {
-		console.log({ err });
-
 		dispatch({
 			type: types.LOGIN_FAILED,
 			payload:
@@ -78,8 +76,6 @@ export const registerUser = (data, toast, history) => async (dispatch) => {
 
 		history.push('/');
 	} catch (err) {
-		console.log('GOT INTO ERROR');
-		console.log({ err });
 		dispatch({
 			type: types.REGISTER_FAILED,
 			payload:
@@ -114,4 +110,90 @@ export const logoutUser = (toast) => (dispatch) => {
 		duration: 4000,
 		isClosable: true,
 	});
+};
+
+export const resetPassword = (data, toast, history) => async (dispatch) => {
+	try {
+		const res = await axios.patch(`/users/resetPassword/${data.token}`, {
+			password: data.password,
+		});
+
+		const title =
+			res?.data?.message || 'Password has been changed successfully!';
+
+		dispatch({
+			type: types.RESET_PASSWORD,
+			message: title,
+		});
+
+		toast({
+			title,
+			status: 'success',
+			position: 'top',
+			duration: 4000,
+			isClosable: true,
+		});
+
+		history.push('/login');
+	} catch (err) {
+		const description =
+			err?.response?.data?.message ||
+			err?.response?.message ||
+			'Something went wrong with resetting the password.';
+
+		dispatch({
+			type: types.RESET_PASSWORD_FAILED,
+			message: description,
+		});
+		toast({
+			title: 'Error',
+			description,
+
+			status: 'error',
+			position: 'top',
+			duration: 4000,
+			isClosable: true,
+		});
+	}
+};
+
+export const forgotPassword = (data, toast) => async (dispatch) => {
+	try {
+		const res = await axios.post(`/users/forgotPassword`, data);
+
+		const title =
+			res?.data?.message || 'Password reset has been sent to your email!';
+
+		toast({
+			title,
+			status: 'success',
+			position: 'top',
+			duration: 4000,
+			isClosable: true,
+		});
+
+		dispatch({
+			type: types.FORGOT_PASSWORD,
+			payload: title,
+		});
+	} catch (err) {
+		const description =
+			err?.response?.data?.message ||
+			err?.response?.message ||
+			'Something went wrong with forgot password. Please contact us.';
+
+		dispatch({
+			type: types.FORGOT_PASSWORD_FAILED,
+			payload: description,
+		});
+
+		toast({
+			title: 'Error',
+			description,
+			status: 'error',
+			position: 'top',
+			duration: 4000,
+			isClosable: true,
+		});
+	}
 };

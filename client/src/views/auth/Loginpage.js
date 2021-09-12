@@ -133,7 +133,7 @@ const LoginPage = () => {
 												<Link
 													color={'blue.400'}
 													as={LinkRouter}
-													to='/forgot-password'>
+													to='/forgotPassword'>
 													Click Here.
 												</Link>
 											</Flex>

@@ -37,6 +37,11 @@ export default (state = initialState, action) => {
 				isLoading: false,
 				message: action.payload,
 			};
+		case types.RESET_PASSWORD:
+		case types.RESET_PASSWORD_FAILED:
+		case types.FORGOT_PASSWORD:
+		case types.FORGOT_PASSWORD_FAILED:
+			return { ...state, message: action.payload };
 		default:
 			return state;
 	}

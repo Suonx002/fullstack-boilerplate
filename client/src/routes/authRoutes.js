@@ -1,6 +1,7 @@
-import ForgotPasswordPage from '../views/auth/ForgotPasswordPage';
 import LoginPage from '../views/auth/Loginpage';
 import RegisterPage from '../views/auth/Registerpage';
+import ForgotPasswordPage from '../views/auth/ForgotPasswordPage';
+import ResetPasswordPage from '../views/auth/ResetPasswordPage';
 
 const authRoutes = [
 	{
@@ -14,8 +15,13 @@ const authRoutes = [
 		type: 'public',
 	},
 	{
-		path: '/forgot-password',
+		path: '/forgotPassword',
 		component: ForgotPasswordPage,
+		type: 'public',
+	},
+	{
+		path: '/resetPassword/:token',
+		component: ResetPasswordPage,
 		type: 'public',
 	},
 ];

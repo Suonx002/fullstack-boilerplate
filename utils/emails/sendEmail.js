@@ -11,13 +11,16 @@ const auth = {
 
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
-const sendEmails = async ({ from, to, subject, html }) => {
+const sendEmail = async ({ from, to, subject, html }) => {
+	let defaultFrom =
+		from || `${process.env.COMPANY_NAME} <${process.env.COMPANY_EMAIL}>`;
+
 	await nodemailerMailgun.sendMail({
-		from,
+		from: defaultFrom,
 		to,
 		subject,
 		html,
 	});
 };
 
-module.exports = sendEmails;
+module.exports = sendEmail;
