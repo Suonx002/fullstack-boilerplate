@@ -18,12 +18,20 @@ import {
 } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
 
+// import {
+// 	HamburgerIcon,
+// 	CloseIcon,
+// 	ChevronDownIcon,
+// 	ChevronRightIcon,
+// } from '@chakra-ui/icons';
+
 import {
-	HamburgerIcon,
-	CloseIcon,
-	ChevronDownIcon,
-	ChevronRightIcon,
-} from '@chakra-ui/icons';
+	FiMenu as HamburgerIcon,
+	FiX as CloseIcon,
+	FiChevronDown as ChevronDownIcon,
+	FiChevronRight as ChevronRightIcon,
+} from 'react-icons/fi';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as authActions from '../../redux/actions/auth/authActions';
@@ -91,7 +99,6 @@ export default function Navbar() {
 							fontWeight={600}
 							color={'white'}
 							bg={'blue.400'}
-							href={'#'}
 							_hover={{
 								bg: 'blue.300',
 							}}>
@@ -120,7 +127,6 @@ export default function Navbar() {
 							fontWeight={600}
 							color={'white'}
 							bg={'blue.400'}
-							href={'#'}
 							_hover={{
 								bg: 'blue.300',
 							}}>
@@ -131,7 +137,7 @@ export default function Navbar() {
 			</Flex>
 
 			<Collapse in={isOpen} animateOpacity>
-				<MobileNav />
+				<MobileNav menuClose={onToggle} />
 			</Collapse>
 		</Box>
 	);
@@ -149,8 +155,9 @@ const DesktopNav = () => {
 					<Popover trigger={'hover'} placement={'bottom-start'}>
 						<PopoverTrigger>
 							<Link
+								as={LinkRouter}
 								p={2}
-								href={navItem.href ?? '#'}
+								to={navItem.to ?? '#'}
 								fontSize={'sm'}
 								fontWeight={500}
 								color={linkColor}
@@ -184,10 +191,11 @@ const DesktopNav = () => {
 	);
 };
 
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const DesktopSubNav = ({ label, to, subLabel }) => {
 	return (
 		<Link
-			href={href}
+			as={LinkRouter}
+			to={to}
 			role={'group'}
 			display={'block'}
 			p={2}
@@ -218,28 +226,48 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 	);
 };
 
-const MobileNav = () => {
+const MobileNav = ({ menuClose }) => {
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 	return (
 		<Stack
 			bg={useColorModeValue('white', 'gray.800')}
+			boxShadow='sm'
 			p={4}
 			display={{ md: 'none' }}>
 			{NAV_ITEMS.map((navItem) => (
-				<MobileNavItem key={navItem.label} {...navItem} />
+				<MobileNavItem key={navItem.label} {...navItem} menuClose={menuClose} />
 			))}
+			{user
+				? AUTHENTICATED_NAV_ITEMS_MOBILE_ONLY.map((navItem) => (
+						<MobileNavItem
+							key={navItem.label}
+							{...navItem}
+							menuClose={menuClose}
+						/>
+				  ))
+				: PUBLIC_NAV_ITEMS_MOBILE_ONLY.map((navItem) => (
+						<MobileNavItem
+							key={navItem.label}
+							{...navItem}
+							menuClose={menuClose}
+						/>
+				  ))}
 		</Stack>
 	);
 };
 
-const MobileNavItem = ({ label, children, href }) => {
+const MobileNavItem = ({ label, children, to, menuClose }) => {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
 		<Stack spacing={4} onClick={children && onToggle}>
 			<Flex
+				onClick={!children && menuClose}
 				py={2}
-				as={Link}
-				href={href ?? '#'}
+				as={LinkRouter}
+				to={to ?? '#'}
 				justify={'space-between'}
 				align={'center'}
 				_hover={{
@@ -271,7 +299,12 @@ const MobileNavItem = ({ label, children, href }) => {
 					align={'start'}>
 					{children &&
 						children.map((child) => (
-							<Link key={child.label} py={2} href={child.href}>
+							<Link
+								onClick={menuClose}
+								as={LinkRouter}
+								key={child.label}
+								py={2}
+								to={child.to}>
 								{child.label}
 							</Link>
 						))}
@@ -282,42 +315,37 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
-	// {
-	// 	label: 'Inspiration',
-	// 	children: [
-	// 		{
-	// 			label: 'Explore Design Work',
-	// 			subLabel: 'Trending Design to inspire you',
-	// 			href: '#',
-	// 		},
-	// 		{
-	// 			label: 'New & Noteworthy',
-	// 			subLabel: 'Up-and-coming Designers',
-	// 			href: '#',
-	// 		},
-	// 	],
-	// },
-	// {
-	// 	label: 'Find Work',
-	// 	children: [
-	// 		{
-	// 			label: 'Job Board',
-	// 			subLabel: 'Find your dream design job',
-	// 			href: '#',
-	// 		},
-	// 		{
-	// 			label: 'Freelance Projects',
-	// 			subLabel: 'An exclusive list for contract work',
-	// 			href: '#',
-	// 		},
-	// 	],
-	// },
-	// {
-	// 	label: 'Learn Design',
-	// 	href: '#',
-	// },
-	// {
-	// 	label: 'Hire Designers',
-	// 	href: '#',
-	// },
+	{
+		label: 'Dashboard',
+		children: [
+			{
+				label: 'Login Page',
+				subLabel: 'Login page sample',
+				to: '/login',
+			},
+			{
+				label: 'Register Page',
+				subLabel: 'Register page sample',
+				to: '/register',
+			},
+		],
+	},
+];
+
+const PUBLIC_NAV_ITEMS_MOBILE_ONLY = [
+	{
+		label: 'Sign In',
+		to: '/login',
+	},
+	{
+		label: 'Sign Up',
+		to: '/register',
+	},
+];
+
+const AUTHENTICATED_NAV_ITEMS_MOBILE_ONLY = [
+	{
+		label: 'Logout',
+		to: '#',
+	},
 ];
