@@ -8,6 +8,33 @@
 - Knex.js
 - PostgreSQL
 
+const featureList = [
+{
+title:
+'Authenications with JSON Web Token for features such as register, login, forgot password, and reset password',
+},
+{
+title: 'Authorization access with public/private for both client & backend',
+},
+{
+title: 'State management are handle with Redux and redux persist',
+},
+{
+title: 'Password are encrypted with bcrypt',
+},
+{
+title: 'Mailgun for sending emails',
+},
+];
+
+### Features
+
+- Authenications with JSON Web Token for features such as register, login, forgot password, and reset password
+- Authorization access with public/private for both client & backend
+- State management are handle with Redux and redux persist
+- Password are encrypted with bcrypt
+- Mailgun for sending emails
+
 ### Requirement
 
 Please add a config.env at the top level of the folder next to server.js and provide the following info:
