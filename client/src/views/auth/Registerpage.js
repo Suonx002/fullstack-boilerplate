@@ -89,7 +89,7 @@ const RegisterPage = () => {
 
 		const data = { firstName, lastName, email, password };
 
-		dispatch(authActions.registerUser(data, toast));
+		dispatch(authActions.registerUser(data, toast, history));
 	};
 
 	useEffect(() => {
@@ -113,7 +113,6 @@ const RegisterPage = () => {
 					validationSchema={loginSchema}
 					onSubmit={onSubmit}>
 					{({ values, isSubmitting }) => {
-						console.log({ isSubmitting });
 						return (
 							<Form>
 								<Box rounded={'lg'} bg={'white'} boxShadow={'lg'} p={8}>

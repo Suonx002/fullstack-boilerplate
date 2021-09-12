@@ -78,6 +78,8 @@ export const registerUser = (data, toast, history) => async (dispatch) => {
 
 		history.push('/');
 	} catch (err) {
+		console.log('GOT INTO ERROR');
+		console.log({ err });
 		dispatch({
 			type: types.REGISTER_FAILED,
 			payload:

@@ -15,6 +15,8 @@ const apiRouters = require('./api');
 
 const app = express();
 
+const sendEmail = require('./utils/emails/sendEmail');
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +25,15 @@ if (process.env.NODE_ENV !== 'production') {
 	app.use(morgan('tiny'));
 }
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+	// (from, to, subject, html)
+	// await sendEmail(
+	// 	'suonx002@gmail.com',
+	// 	'hello@vuthysuon.com',
+	// 	'hello world',
+	// 	'my email description'
+	// );
+
 	return res.status(200).json({
 		status: 'success',
 		message: 'Welcome to Full Stack Boilerplate',

@@ -3,6 +3,8 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../database/db');
 const tableNames = require('../database/constants/tableNames');
 
+const bcryptMethods = require('../utils/bcryptMethods');
+
 exports.get = async (id, email) => {
 	const user = await db(tableNames.users)
 		.select('*')
@@ -40,4 +42,49 @@ exports.create = async (userData) => {
 
 exports.delete = async (id) => {
 	return await db(tableNames.users).where('id', id).delete();
+};
+
+exports.forgotPassword = async (
+	email,
+	forgotPasswordToken,
+	forgotPasswordTokenExpires
+) => {
+	console.log({
+		email,
+		forgotPasswordToken,
+		forgotPasswordTokenExpires,
+	});
+
+	const user = await db(tableNames.users)
+		.where({ email })
+		.update({
+			forgotPasswordToken,
+			forgotPasswordTokenExpires,
+		})
+		.returning('*');
+
+	console.log({ user });
+
+	return user;
+};
+
+exports.resetPassword = async (token, password) => {
+	const currentDate = new Date().toISOString();
+
+	const hashPassword = await bcryptMethods.hashPassword(password);
+
+	const user = await db(tableNames.users)
+		.where({
+			forgotPasswordToken: token,
+		})
+		.andWhere('forgotPasswordTokenExpires', '>', currentDate)
+		.update({
+			password: hashPassword,
+			passwordChangedAt: currentDate,
+		})
+		.returning('*');
+
+	console.log({ user });
+
+	return user;
 };

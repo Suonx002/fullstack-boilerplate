@@ -24,7 +24,7 @@ import { Formik, Field, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../../redux/actions/auth/authActions';
 
-const LoginPage = () => {
+const ResetPasswordPage = () => {
 	const {
 		auth: { user },
 	} = useSelector((state) => state);
@@ -35,33 +35,25 @@ const LoginPage = () => {
 
 	const initialValues = {
 		email: '',
-		password: '',
 	};
 
-	const loginSchema = Yup.object().shape({
+	const resetPasswordSchema = Yup.object().shape({
 		email: Yup.string().email().required().label('Email'),
-		password: Yup.string().required().label('Password'),
 	});
 
-	const loginFields = [
+	const resetPasswordFields = [
 		{
 			name: 'email',
 			label: 'Email',
 			type: 'email',
 		},
-		{
-			name: 'password',
-			label: 'Password',
-			type: 'password',
-		},
 	];
 
 	const onSubmit = async (values) => {
 		const email = values?.email?.trim();
-		const password = values?.password?.trim();
-		const data = { email, password };
+		const data = { email };
 
-		dispatch(authActions.loginUser(data, toast, history));
+		// dispatch(authActions.loginUser(data, toast, history));
 	};
 
 	useEffect(() => {
@@ -78,18 +70,18 @@ const LoginPage = () => {
 			bg={useColorModeValue('gray.50', 'gray.800')}>
 			<Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
 				<Stack align={'center'}>
-					<Heading fontSize={'4xl'}>Sign in to your account</Heading>
+					<Heading fontSize={'4xl'}>reset your password</Heading>
 				</Stack>
 				<Formik
 					initialValues={initialValues}
-					validationSchema={loginSchema}
+					validationSchema={resetPasswordSchema}
 					onSubmit={onSubmit}>
 					{(values, isSubmitting) => (
 						<Form>
 							<Box rounded={'lg'} bg={'white'} boxShadow={'lg'} p={8}>
 								<Stack spacing={4} minW={{ base: 'auto', sm: 350 }}>
-									{loginFields?.length > 0 &&
-										loginFields.map((item) => (
+									{resetPasswordFields?.length > 0 &&
+										resetPasswordFields.map((item) => (
 											<Field name={item.name} key={item.name}>
 												{({ field, form }) => (
 													<FormControl
@@ -113,32 +105,6 @@ const LoginPage = () => {
 										))}
 
 									<Stack spacing={10}>
-										{/* <Stack
-											direction={{ base: 'column', sm: 'row' }}
-											align={'start'}
-											justify={'space-between'}>
-											<Checkbox>Remember me</Checkbox>
-											<Link color={'blue.400'}>Forgot password?</Link>
-										</Stack> */}
-
-										<Stack direction={{ base: 'column' }} align={'start'}>
-											<Flex>
-												<Text mr={2}>Don't have an account?</Text>
-												<Link color={'blue.400'} as={LinkRouter} to='/register'>
-													Click Here.
-												</Link>
-											</Flex>
-											<Flex>
-												<Text mr={2}>Forgot password?</Text>
-												<Link
-													color={'blue.400'}
-													as={LinkRouter}
-													to='/forgot-password'>
-													Click Here.
-												</Link>
-											</Flex>
-										</Stack>
-
 										<Button
 											isLoading={isSubmitting}
 											type='submit'
@@ -147,7 +113,7 @@ const LoginPage = () => {
 											_hover={{
 												bg: 'blue.500',
 											}}>
-											Login
+											Send Reset Link
 										</Button>
 									</Stack>
 								</Stack>
@@ -160,4 +126,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default ResetPasswordPage;

@@ -1,8 +1,10 @@
 const db = require('../models/usersModel');
+const crypto = require('crypto');
 
 const AppError = require('../utils/AppError');
 const permissions = require('../middlewares/permissions');
 const bcryptMethods = require('../utils/bcryptMethods');
+const sendEmail = require('../utils/emails/sendEmail');
 
 exports.getMe = async (req, res, next) => {
 	return res.status(200).json({
@@ -31,7 +33,10 @@ exports.get = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
 	const { email, firstName, lastName, password } = req.body;
-	const userData = await db.get(null, email);
+
+	emailLowerCase = email.toLowerCase();
+
+	const userData = await db.get(null, emailLowerCase);
 
 	if (userData?.length) {
 		return next(new AppError(`This account is already existed.`, 400));
@@ -40,7 +45,7 @@ exports.create = async (req, res, next) => {
 	const hashedPassword = await bcryptMethods.hashPassword(password);
 
 	const newUser = await db.create({
-		email,
+		email: emailLowerCase,
 		firstName,
 		lastName,
 		password: hashedPassword,
@@ -48,7 +53,7 @@ exports.create = async (req, res, next) => {
 
 	const { password: newPassword, ...rest } = newUser[0];
 
-	const token = permissions.signJwtToken(email);
+	const token = permissions.signJwtToken(emailLowerCase);
 
 	return res.status(201).json({
 		status: 'success',
@@ -105,5 +110,57 @@ exports.delete = async (req, res, next) => {
 	return res.status(200).json({
 		status: 'success',
 		message: `Successfully deleted user ${id}`,
+	});
+};
+
+exports.forgotPassword = async (req, res, next) => {
+	const { email } = req.body;
+
+	const forgotPasswordToken = crypto.randomBytes(32).toString('hex');
+	const forgotPasswordTokenEncrypted = crypto
+		.createHash('sha256')
+		.update(forgotPasswordToken)
+		.digest('hex');
+
+	// 10 minutes
+	const forgotPasswordTokenExpires = new Date(
+		Date.now() + 10 * 60 * 1000
+	).toISOString();
+
+	const user = await db.forgotPassword(
+		email,
+		forgotPasswordTokenEncrypted,
+		forgotPasswordTokenExpires
+	);
+
+	if (!user?.length) {
+		return next(new AppError(`There is no account with this email.`, 400));
+	}
+
+	return res.status(200).json({
+		status: 'success',
+		message: `Password reset has been sent to your email!`,
+		forgotPasswordToken,
+		forgotPasswordTokenEncrypted,
+	});
+};
+
+exports.resetPassword = async (req, res, next) => {
+	const { password } = req.body;
+	const { token } = req.params;
+
+	const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+
+	const user = await db.resetPassword(hashedToken, password);
+
+	if (!user?.length) {
+		return next(
+			new AppError(`Password reset expired. Please request a new one.`, 400)
+		);
+	}
+
+	res.status(200).json({
+		status: 'success',
+		message: `Password has changed successfully!`,
 	});
 };

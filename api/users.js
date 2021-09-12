@@ -31,6 +31,12 @@ router
 	.route('/me')
 	.get(permissions.privateRoute, catchAsync(userController.getMe));
 
+router.route('/forgotPassword').post(catchAsync(userController.forgotPassword));
+
+router
+	.route('/resetPassword/:token')
+	.patch(catchAsync(userController.resetPassword));
+
 router
 	.route('/:id')
 	.get(catchAsync(userController.get))
