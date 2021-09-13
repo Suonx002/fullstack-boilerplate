@@ -38,7 +38,7 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../../../redux/actions/auth/authActions';
 
-import LINK_ITEMS from './LINK_ITEMS';
+import LINK_ITEMS from '../LINK_ITEMS';
 
 const NavbarDashboard = ({ children }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();

@@ -29,13 +29,23 @@ const LINK_ITEMS = [
 		children: [
 			{
 				label: 'Basic Table Sample',
-				subLabel: 'Basic table page sample',
 				to: '/dashboard/table/basicSampleTable',
 			},
 			{
 				label: 'Basic Table With Pagination Sample',
-				subLabel: 'Basic table with pagination page sample',
 				to: '/dashboard/table/basicSampleWithPaginationTable',
+			},
+			{
+				label: 'Table With Sort And Pagination',
+				to: '/dashboard/table/tableWithSortAndPagination',
+			},
+			{
+				label: 'Table With Filter, Sort, and Pagination',
+				to: '/dashboard/table/tableFilterSortPagination',
+			},
+			{
+				label: 'Advance Table',
+				to: '/dashboard/table/advanceTable',
 			},
 		],
 	},

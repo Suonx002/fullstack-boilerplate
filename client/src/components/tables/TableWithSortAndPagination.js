@@ -20,9 +20,12 @@ import {
 	useBreakpointValue,
 	Select,
 } from '@chakra-ui/react';
-import { useTable, usePagination } from 'react-table';
 
-const BasicTableWithPaginations = ({
+import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
+
+import { useTable, usePagination, useSortBy } from 'react-table';
+
+const TableWithSortAndPagination = ({
 	TABLE_HEADER_COLUMNS,
 	TABLE_DATA_SAMPLES,
 }) => {
@@ -49,22 +52,23 @@ const BasicTableWithPaginations = ({
 		canNextPage,
 		pageOptions,
 
-		pageCount,
 		nextPage,
 		previousPage,
 		setPageSize,
 	} = useTable(
 		{
+			initialState: { sortBy: [{ id: 'id', desc: false }] },
 			columns: tableColumns,
 			data: tableDataSamples,
 		},
+		useSortBy,
 		usePagination
 	);
 
 	return (
 		<Box bg='whiteAlpha.900' p={8} borderRadius={4}>
 			<Heading as='h2' size='lg' isTruncated mb={4}>
-				Users (Basic Table With Pagination)
+				Users ( Table With Sort and Pagination)
 			</Heading>
 			{/* STARTING TABLE */}
 			<Flex overflowX='auto'>
@@ -88,8 +92,34 @@ const BasicTableWithPaginations = ({
 										// Loop over the headers in each row
 										headerGroup.headers.map((column) => (
 											// Apply the header cell props
-											<Th {...column.getHeaderProps()} color='whiteAlpha.900'>
-												{column.render('Header')}
+											<Th
+												{...column.getHeaderProps(
+													column.getSortByToggleProps()
+												)}
+												color='whiteAlpha.900'>
+												<Flex justify='space-between' align='center'>
+													<Box>
+														{
+															// Render the header
+															column.render('Header')
+														}
+													</Box>
+													<Box>
+														{column?.isSorted ? (
+															column?.isSortedDesc ? (
+																<Icon fontSize={{ base: 12, md: 16, lg: 20 }}>
+																	<FiChevronUp />
+																</Icon>
+															) : (
+																<Icon fontSize={{ base: 12, md: 16, lg: 20 }}>
+																	<FiChevronDown />
+																</Icon>
+															)
+														) : (
+															''
+														)}
+													</Box>
+												</Flex>
 											</Th>
 										))
 									}
@@ -175,4 +205,4 @@ const BasicTableWithPaginations = ({
 	);
 };
 
-export default BasicTableWithPaginations;
+export default TableWithSortAndPagination;

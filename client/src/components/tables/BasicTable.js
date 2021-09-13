@@ -22,10 +22,7 @@ import {
 } from '@chakra-ui/react';
 import { useTable } from 'react-table';
 
-import TABLE_HEADER_COLUMNS from './TABLE_HEADER_COLUMNS';
-import TABLE_DATA_SAMPLES from './TABLE_DATA_SAMPLES';
-
-const BasicTable = () => {
+const BasicTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 	const tableColumns = useMemo(() => TABLE_HEADER_COLUMNS, []);
 	const tableDataSamples = useMemo(() => TABLE_DATA_SAMPLES, []);
 
@@ -43,7 +40,7 @@ const BasicTable = () => {
 	return (
 		<Box bg='whiteAlpha.900' p={8} borderRadius={4}>
 			<Heading as='h2' size='lg' isTruncated mb={4}>
-				Users
+				Users (Basic Table)
 			</Heading>
 			{/* STARTING TABLE */}
 			<Flex overflowX='auto'>

@@ -5,6 +5,9 @@ import RegisterSample from '../views/dashboard/auth/RegisterSample';
 
 import BasicTableSample from '../views/dashboard/tables/BasicTableSample';
 import BasicTableWithPaginationSample from '../views/dashboard/tables/BasicTableWithPaginationSample';
+import TableWithSortAndPaginationSample from '../views/dashboard/tables/TableWithSortAndPaginationSample';
+import TableWithFilterSortPaginationSample from '../views/dashboard/tables/TableWithFilterSortPagination';
+import AdvanceTableSample from '../views/dashboard/tables/AdvanceTableSample';
 
 const homeRoutes = [
 	{
@@ -30,6 +33,21 @@ const homeRoutes = [
 	{
 		path: '/dashboard/table/basicSampleWithPaginationTable',
 		component: BasicTableWithPaginationSample,
+		type: 'private',
+	},
+	{
+		path: '/dashboard/table/tableWithSortAndPagination',
+		component: TableWithSortAndPaginationSample,
+		type: 'private',
+	},
+	{
+		path: '/dashboard/table/tableFilterSortPagination',
+		component: TableWithFilterSortPaginationSample,
+		type: 'private',
+	},
+	{
+		path: '/dashboard/table/advanceTable',
+		component: AdvanceTableSample,
 		type: 'private',
 	},
 ];
