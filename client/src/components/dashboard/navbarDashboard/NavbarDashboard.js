@@ -26,43 +26,19 @@ import {
 
 import {
 	FiHome,
-	FiTrendingUp,
-	FiCompass,
-	FiStar,
-	FiSettings,
+	FiFileText,
 	FiMenu,
 	FiBell,
 	FiChevronDown,
 } from 'react-icons/fi';
+import { BiTable } from 'react-icons/bi';
 
 import { Link as LinkRouter } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import * as authActions from '../../../redux/actions/auth/authActions';
 
-const LinkItems = [
-	{
-		label: 'Home',
-		icon: FiHome,
-		to: '/',
-	},
-	{
-		label: 'Pages',
-		icon: FiTrendingUp,
-		children: [
-			{
-				label: 'Login Sample',
-				subLabel: 'Login page sample',
-				to: '/dashboard/login',
-			},
-			{
-				label: 'Register Sample',
-				subLabel: 'Register page sample',
-				to: '/dashboard/register',
-			},
-		],
-	},
-];
+import LINK_ITEMS from './LINK_ITEMS';
 
 const NavbarDashboard = ({ children }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -86,7 +62,9 @@ const NavbarDashboard = ({ children }) => {
 			</Drawer>
 			{/* mobile nav */}
 			<MobileNav onOpen={onOpen} />
-			<Box ml={{ base: 0 }}>{children}</Box>
+			<Box ml={{ base: 0, md: 60 }} p='4'>
+				{children}
+			</Box>
 		</Box>
 	);
 };
@@ -108,7 +86,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 				</Text>
 				<CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
 			</Flex>
-			{LinkItems.map((item) => (
+			{LINK_ITEMS.map((item) => (
 				<NavItem key={item.label} icon={item.icon} item={item} />
 			))}
 		</Box>
@@ -118,10 +96,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
 const NavItem = ({ icon, item, ...rest }) => {
 	const { isOpen, onToggle } = useDisclosure();
 
-	console.log({ item });
-
 	return (
-		<Stack spacing={4} onClick={item?.children && onToggle}>
+		<Stack
+			spacing={4}
+			as={LinkRouter}
+			to={item?.to || '#'}
+			onClick={item?.children && onToggle}>
 			<Flex
 				align='center'
 				p='4'
@@ -130,7 +110,7 @@ const NavItem = ({ icon, item, ...rest }) => {
 				role='group'
 				cursor='pointer'
 				_hover={{
-					bg: 'cyan.400',
+					bg: 'blue.400',
 					color: 'white',
 				}}
 				{...rest}>
@@ -170,6 +150,7 @@ const NavItem = ({ icon, item, ...rest }) => {
 					{item?.children?.length > 0 &&
 						item?.children.map((child) => (
 							<Link
+								_hover={{ textDecoration: 'none', color: 'blue.400' }}
 								width='100%'
 								as={LinkRouter}
 								to={child.to}
