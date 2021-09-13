@@ -4,6 +4,7 @@ import PrivateRoutes from './PrivateRoutes';
 
 import homeRoutes from './homeRoutes';
 import authRoutes from './authRoutes';
+
 import dashboardRoutes from './dashboardRoutes';
 
 import Page404 from '../views/404/Page404';

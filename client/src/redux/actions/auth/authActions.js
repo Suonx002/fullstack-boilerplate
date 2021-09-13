@@ -33,7 +33,7 @@ export const loginUser = (data, toast, history) => async (dispatch) => {
 			duration: 4000,
 			isClosable: true,
 		});
-
+		// change this to '/' if without dashboard
 		history.push('/dashboard');
 	} catch (err) {
 		dispatch({
@@ -74,7 +74,8 @@ export const registerUser = (data, toast, history) => async (dispatch) => {
 			isClosable: true,
 		});
 
-		history.push('/');
+		// change this to '/' if without dashboard
+		history.push('/dashboard');
 	} catch (err) {
 		dispatch({
 			type: types.REGISTER_FAILED,

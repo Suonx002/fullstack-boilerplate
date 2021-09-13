@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import setAuthToken from './utils/setAuthToken';
 import * as authActions from './redux/actions/auth/authActions';
 
+import NavbarDashboard from './components/dashboard/navbarDashboard/NavbarDashboard';
 import Navbar from './components/navbar/Navbar';
 import MainRoutes from './routes';
 
@@ -24,8 +25,18 @@ const App = () => {
 
 	return (
 		<>
-			{!user && <Navbar />}
-			<MainRoutes />
+			{/* start -  with Dashboard */}
+			{user ? (
+				<NavbarDashboard>
+					<MainRoutes />
+				</NavbarDashboard>
+			) : (
+				<>
+					<Navbar />
+					<MainRoutes />
+				</>
+			)}
+			{/* end -  with Dashboard */}
 		</>
 	);
 };
