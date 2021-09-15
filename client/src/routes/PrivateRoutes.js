@@ -9,13 +9,10 @@ const PrivateRoutes = ({ component: Component, ...rest }) => {
 		<Route
 			{...rest}
 			render={(props) => {
-				const PERMISSION_ACCESS = ['user', 'admin'];
+				// const PERMISSION_ACCESS = ['user', 'admin'];
 				const isUserLoggedIn = localStorage?.jwtToken;
 
-				if (
-					isUserLoggedIn ||
-					(isAuthenticated && user && PERMISSION_ACCESS.includes(user.role))
-				) {
+				if (isUserLoggedIn || isAuthenticated) {
 					return <Component {...props} />;
 				}
 

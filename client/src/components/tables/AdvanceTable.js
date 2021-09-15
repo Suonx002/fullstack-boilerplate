@@ -19,6 +19,7 @@ import {
 	Tooltip,
 	useBreakpointValue,
 	Select,
+	useDisclosure,
 } from '@chakra-ui/react';
 
 import {
@@ -38,6 +39,7 @@ import {
 } from 'react-table';
 
 import FilterSearchBar from './FilterSearchBar';
+import EditUserTableForm from './EditUserTableForm';
 
 const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 	const tableColumns = useMemo(() => TABLE_HEADER_COLUMNS, []);
@@ -106,23 +108,32 @@ const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 				},
 				...columns,
 				{
-					id: 'selections',
+					id: 'actions',
 					Header: ({ getToggleAllRowsSelectedProps }) => (
 						<Th color='whiteAlpha.900' border='none'>
 							Actions
 						</Th>
 					),
 					Cell: ({ row }) => {
+						const { isOpen, onOpen, onClose } = useDisclosure();
+
 						return (
 							<HStack>
+								<EditUserTableForm
+									heading='Edit User'
+									isOpen={isOpen}
+									onClose={onClose}
+									currentUserData={row?.values || ''}
+								/>
 								<Tooltip label='Edit'>
 									<IconButton
 										variant='outline'
 										size='sm'
 										onClick={() => {
-											console.log({
-												row: row?.values,
-											});
+											// setCurrentUserData((prevState) => {
+											// 	return { ...prevState, ...row?.values };
+											// });
+											onOpen();
 										}}>
 										<FiEdit fontSize={{ base: 14, md: 16 }} />
 									</IconButton>

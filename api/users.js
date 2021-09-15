@@ -10,11 +10,7 @@ const userController = require('../controllers/userController');
 
 router
 	.route('/')
-	.get(
-		permissions.privateRoute,
-		permissions.permissionAccesByRoles(['basic', 'pro', 'enterprise']),
-		catchAsync(userController.getAll)
-	)
+	.get(permissions.privateRoute, catchAsync(userController.getAll))
 	.post(
 		validateRequest(userSchema.createSchema),
 		catchAsync(userController.create)
