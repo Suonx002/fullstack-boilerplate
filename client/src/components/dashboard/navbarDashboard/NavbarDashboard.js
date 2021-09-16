@@ -35,13 +35,18 @@ import { BiTable } from 'react-icons/bi';
 
 import { Link as LinkRouter } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../../../redux/actions/auth/authActions';
 
 import LINK_ITEMS from '../LINK_ITEMS';
 
 const NavbarDashboard = ({ children }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
+
 	return (
 		<Box minH='100vh' bg={useColorModeValue('gray.100', 'gray.900')}>
 			<SidebarContent
@@ -95,6 +100,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
 
 const NavItem = ({ icon, item, ...rest }) => {
 	const { isOpen, onToggle } = useDisclosure();
+
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 
 	return (
 		<Stack
@@ -169,6 +178,9 @@ const NavItem = ({ icon, item, ...rest }) => {
 const MobileNav = ({ onOpen, ...rest }) => {
 	const dispatch = useDispatch();
 	const toast = useToast();
+	const {
+		auth: { user },
+	} = useSelector((state) => state);
 
 	return (
 		<Flex
@@ -222,9 +234,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
 									alignItems='flex-start'
 									spacing='1px'
 									ml='2'>
-									<Text fontSize='sm'>Justina Clark</Text>
+									<Text fontSize='sm'>
+										{user?.firstName || ''} {user?.lastName || ''}
+									</Text>
 									<Text fontSize='xs' color='gray.600'>
-										Admin
+										{user?.role || ''}
 									</Text>
 								</VStack>
 								<Box display={{ base: 'none', md: 'flex' }}>

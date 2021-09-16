@@ -20,13 +20,15 @@ exports.seed = async (knex) => {
 			const id = uuidv4();
 			const { firstName, lastName, email, password } = user;
 
-			const newPassword = await bcryptMethods.hashPassword(password);
+			// const newPassword = await bcryptMethods.hashPassword(password);
+
+			// console.log(newPassword);
 
 			dbUserList.push({
 				firstName,
 				lastName,
 				email,
-				password: newPassword,
+				password,
 				role: 'user',
 				id,
 				passwordChangedAt: new Date().toISOString(),
