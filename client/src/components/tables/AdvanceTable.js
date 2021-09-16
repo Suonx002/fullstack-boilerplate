@@ -307,13 +307,17 @@ const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 				</Table>
 			</Flex>
 
-			<Flex justify='space-between' align='center' p={5}>
-				<HStack>
+			<Flex
+				direction={{ base: 'column', md: 'row' }}
+				justify='space-between'
+				align='center'
+				p={5}>
+				<HStack mb={{ base: 4, md: 6 }}>
 					<Text fontSize='lg' mr={3}>
 						Total: {tableDataSamples?.length}
 					</Text>
 				</HStack>
-				<Flex align='center'>
+				<Flex align='center' mb={{ base: 4, md: 6 }}>
 					<Text fontSize='md' minW='125px'>
 						{' '}
 						Rows per page
@@ -331,7 +335,7 @@ const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 					</Select>
 				</Flex>
 
-				<HStack>
+				<HStack mb={{ base: 4, md: 6 }}>
 					<Button
 						variant='outline'
 						onClick={previousPage}
