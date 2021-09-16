@@ -18,7 +18,7 @@
 
 ### Requirement
 
-Please add a config.env at the top level of the folder next to server.js and provide the following info:
+Please add a configs.env at the top level of the folder next to server.js and provide the following info:
 
 ```
 NODE_ENV=
