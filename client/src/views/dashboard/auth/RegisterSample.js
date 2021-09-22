@@ -126,7 +126,7 @@ const RegisterSample = () => {
 												direction={{ base: 'column', sm: 'row' }}
 												align={'start'}>
 												<Text>Already have an account?</Text>
-												<Link color={'blue.400'} as={LinkRouter} to='/login'>
+												<Link color={'primary.400'} as={LinkRouter} to='/login'>
 													Login here.
 												</Link>
 											</Stack>
@@ -134,10 +134,10 @@ const RegisterSample = () => {
 												isLoading={isSubmitting}
 												loadingText='Loading'
 												type='submit'
-												bg={'blue.400'}
+												bg={'primary.400'}
 												color={'white'}
 												_hover={{
-													bg: 'blue.500',
+													bg: 'primary.500',
 												}}>
 												Register
 											</Button>

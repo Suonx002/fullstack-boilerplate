@@ -230,7 +230,7 @@ const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 					borderColor='gray.100'
 					borderWidth={1}
 					borderRadius={4}>
-					<Thead bg='blue.400'>
+					<Thead bg='primary.400'>
 						{
 							// Loop over the header rows
 							headerGroups.map((headerGroup) => (

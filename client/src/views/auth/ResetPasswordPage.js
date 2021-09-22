@@ -120,10 +120,10 @@ const ResetPasswordPage = () => {
 										<Button
 											isLoading={isSubmitting}
 											type='submit'
-											bg={'blue.400'}
+											bg={'primary.400'}
 											color={'white'}
 											_hover={{
-												bg: 'blue.500',
+												bg: 'primary.500',
 											}}>
 											Update Password
 										</Button>

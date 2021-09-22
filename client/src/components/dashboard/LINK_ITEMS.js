@@ -1,4 +1,4 @@
-import { FiHome, FiFileText } from 'react-icons/fi';
+import { FiHome, FiFileText, FiSettings } from 'react-icons/fi';
 import { BiTable } from 'react-icons/bi';
 
 const LINK_ITEMS = [
@@ -7,6 +7,7 @@ const LINK_ITEMS = [
 		icon: FiHome,
 		to: '/dashboard',
 	},
+	// Pages
 	{
 		label: 'Pages',
 		icon: FiFileText,
@@ -23,6 +24,7 @@ const LINK_ITEMS = [
 			},
 		],
 	},
+	// tables
 	{
 		label: 'Tables',
 		icon: BiTable,
@@ -48,6 +50,12 @@ const LINK_ITEMS = [
 				to: '/dashboard/table/advanceTable',
 			},
 		],
+	},
+	// Settings
+	{
+		label: 'Settings',
+		icon: FiSettings,
+		to: '/dashboard/settings',
 	},
 ];
 

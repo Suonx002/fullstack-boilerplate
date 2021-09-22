@@ -106,10 +106,10 @@ const EditUserTableForm = ({ heading, currentUserData, isOpen, onClose }) => {
 									type='submit'
 									Button
 									isLoading={isSubmitting}
-									bg={'blue.400'}
+									bg={'primary.400'}
 									color={'white'}
 									_hover={{
-										bg: 'blue.500',
+										bg: 'primary.500',
 									}}
 									onClick={onClose}>
 									Save

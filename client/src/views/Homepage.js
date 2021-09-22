@@ -54,7 +54,7 @@ const Homepage = () => {
 					fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
 					lineHeight={'110%'}>
 					Fullstack Boilerplate <br />
-					<Text as={'span'} color={'blue.400'}>
+					<Text as={'span'} color={'primary.400'}>
 						for building modern web applications
 					</Text>
 				</Heading>
@@ -80,12 +80,12 @@ const Homepage = () => {
 					<Button
 						as={LinkRouter}
 						to={user ? '/dashboard' : '/register'}
-						colorScheme={'blue'}
-						bg={'blue.400'}
+						colorScheme={'primary'}
+						bg={'primary.400'}
 						rounded={'full'}
 						px={6}
 						_hover={{
-							bg: 'blue.500',
+							bg: 'primary.500',
 						}}>
 						{user ? 'Dashboard' : 'Get Started'}
 					</Button>

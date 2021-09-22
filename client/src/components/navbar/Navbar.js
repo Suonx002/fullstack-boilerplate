@@ -98,9 +98,9 @@ export default function Navbar() {
 							fontSize={'sm'}
 							fontWeight={600}
 							color={'white'}
-							bg={'blue.400'}
+							bg={'primary.400'}
 							_hover={{
-								bg: 'blue.300',
+								bg: 'primary.300',
 							}}>
 							Logout
 						</Button>
@@ -126,9 +126,9 @@ export default function Navbar() {
 							fontSize={'sm'}
 							fontWeight={600}
 							color={'white'}
-							bg={'blue.400'}
+							bg={'primary.400'}
 							_hover={{
-								bg: 'blue.300',
+								bg: 'primary.300',
 							}}>
 							Sign Up
 						</Button>
@@ -200,12 +200,12 @@ const DesktopSubNav = ({ label, to, subLabel }) => {
 			display={'block'}
 			p={2}
 			rounded={'md'}
-			_hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}>
+			_hover={{ bg: useColorModeValue('primary.50', 'gray.900') }}>
 			<Stack direction={'row'} align={'center'}>
 				<Box>
 					<Text
 						transition={'all .3s ease'}
-						_groupHover={{ color: 'blue.400' }}
+						_groupHover={{ color: 'primary.400' }}
 						fontWeight={500}>
 						{label}
 					</Text>
@@ -219,7 +219,7 @@ const DesktopSubNav = ({ label, to, subLabel }) => {
 					justify={'flex-end'}
 					align={'center'}
 					flex={1}>
-					<Icon color={'blue.400'} w={5} h={5} as={ChevronRightIcon} />
+					<Icon color={'primary.400'} w={5} h={5} as={ChevronRightIcon} />
 				</Flex>
 			</Stack>
 		</Link>

@@ -8,6 +8,7 @@ import BasicTableWithPaginationSample from '../views/dashboard/tables/BasicTable
 import TableWithSortAndPaginationSample from '../views/dashboard/tables/TableWithSortAndPaginationSample';
 import TableWithFilterSortPaginationSample from '../views/dashboard/tables/TableWithFilterSortPagination';
 import AdvanceTableSample from '../views/dashboard/tables/AdvanceTableSample';
+import Settings from '../views/dashboard/settings/Settings';
 
 const homeRoutes = [
 	{
@@ -15,6 +16,7 @@ const homeRoutes = [
 		component: DashboardHomepage,
 		type: 'private',
 	},
+	// Authentications
 	{
 		path: '/dashboard/login',
 		component: LoginSample,
@@ -25,6 +27,7 @@ const homeRoutes = [
 		component: RegisterSample,
 		type: 'private',
 	},
+	// Tables
 	{
 		path: '/dashboard/table/basicSampleTable',
 		component: BasicTableSample,
@@ -48,6 +51,12 @@ const homeRoutes = [
 	{
 		path: '/dashboard/table/advanceTable',
 		component: AdvanceTableSample,
+		type: 'private',
+	},
+	// Settings
+	{
+		path: '/dashboard/settings',
+		component: Settings,
 		type: 'private',
 	},
 ];

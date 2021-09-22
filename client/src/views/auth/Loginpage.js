@@ -118,20 +118,23 @@ const LoginPage = () => {
 											align={'start'}
 											justify={'space-between'}>
 											<Checkbox>Remember me</Checkbox>
-											<Link color={'blue.400'}>Forgot password?</Link>
+											<Link color={'primary.400'}>Forgot password?</Link>
 										</Stack> */}
 
 										<Stack direction={{ base: 'column' }} align={'start'}>
 											<Flex>
 												<Text mr={2}>Don't have an account?</Text>
-												<Link color={'blue.400'} as={LinkRouter} to='/register'>
+												<Link
+													color={'primary.400'}
+													as={LinkRouter}
+													to='/register'>
 													Click Here.
 												</Link>
 											</Flex>
 											<Flex>
 												<Text mr={2}>Forgot password?</Text>
 												<Link
-													color={'blue.400'}
+													color={'primary.400'}
 													as={LinkRouter}
 													to='/forgotPassword'>
 													Click Here.
@@ -142,10 +145,10 @@ const LoginPage = () => {
 										<Button
 											isLoading={isSubmitting}
 											type='submit'
-											bg={'blue.400'}
+											bg={'primary.400'}
 											color={'white'}
 											_hover={{
-												bg: 'blue.500',
+												bg: 'primary.500',
 											}}>
 											Login
 										</Button>

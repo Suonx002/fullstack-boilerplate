@@ -12,6 +12,7 @@ import {
 	Link,
 	Drawer,
 	DrawerContent,
+	DrawerOverlay,
 	Text,
 	useDisclosure,
 	Menu,
@@ -24,14 +25,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 
-import {
-	FiHome,
-	FiFileText,
-	FiMenu,
-	FiBell,
-	FiChevronDown,
-} from 'react-icons/fi';
-import { BiTable } from 'react-icons/bi';
+import { FiMenu, FiBell, FiChevronDown } from 'react-icons/fi';
 
 import { Link as LinkRouter } from 'react-router-dom';
 
@@ -61,6 +55,8 @@ const NavbarDashboard = ({ children }) => {
 				returnFocusOnClose={false}
 				onOverlayClick={onClose}
 				size='full'>
+				<DrawerOverlay />
+
 				<DrawerContent>
 					<SidebarContent onClose={onClose} />
 				</DrawerContent>
@@ -119,7 +115,7 @@ const NavItem = ({ icon, item, ...rest }) => {
 				role='group'
 				cursor='pointer'
 				_hover={{
-					bg: 'blue.400',
+					bg: 'primary.400',
 					color: 'white',
 				}}
 				{...rest}>
@@ -150,7 +146,8 @@ const NavItem = ({ icon, item, ...rest }) => {
 				<Stack
 					ml={12}
 					mt={2}
-					pl={4}
+					pl={3}
+					pr={2}
 					borderLeft={1}
 					borderStyle={'solid'}
 					borderColor={useColorModeValue('gray.200', 'gray.700')}
@@ -159,7 +156,7 @@ const NavItem = ({ icon, item, ...rest }) => {
 					{item?.children?.length > 0 &&
 						item?.children.map((child) => (
 							<Link
-								_hover={{ textDecoration: 'none', color: 'blue.400' }}
+								_hover={{ textDecoration: 'none', color: 'primary.400' }}
 								width='100%'
 								as={LinkRouter}
 								to={child.to}
