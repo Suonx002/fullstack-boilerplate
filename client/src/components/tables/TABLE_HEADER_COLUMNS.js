@@ -19,14 +19,14 @@ const TABLE_HEADER_COLUMNS = [
 		Header: 'Roles',
 		accessor: 'role', // accessor is the "key" in the data
 	},
-	{
-		Header: 'Created At',
-		accessor: 'createdAt', // accessor is the "key" in the data
-	},
-	{
-		Header: 'Updated At',
-		accessor: 'updatedAt', // accessor is the "key" in the data
-	},
+	// {
+	// 	Header: 'Created At',
+	// 	accessor: 'createdAt', // accessor is the "key" in the data
+	// },
+	// {
+	// 	Header: 'Updated At',
+	// 	accessor: 'updatedAt', // accessor is the "key" in the data
+	// },
 ];
 
 export default TABLE_HEADER_COLUMNS;

@@ -36,7 +36,7 @@ exports.get = async (req, res, next) => {
 exports.create = async (req, res, next) => {
 	const { email, firstName, lastName, password } = req.body;
 
-	emailLowerCase = email.toLowerCase();
+	const emailLowerCase = email.toLowerCase();
 
 	const userData = await db.get(null, emailLowerCase);
 

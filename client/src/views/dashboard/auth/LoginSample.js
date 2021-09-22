@@ -21,7 +21,7 @@ import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 
 const LoginSample = () => {
-	const toast = useToast();
+	// const toast = useToast();
 
 	const initialValues = {
 		email: '',
@@ -47,8 +47,8 @@ const LoginSample = () => {
 	];
 
 	const onSubmit = async (values) => {
-		const email = values?.email?.trim();
-		const password = values?.password?.trim();
+		// const email = values?.email?.trim();
+		// const password = values?.password?.trim();
 	};
 
 	return (

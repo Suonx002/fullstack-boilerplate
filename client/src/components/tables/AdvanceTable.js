@@ -180,14 +180,14 @@ const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 	return (
 		<Box bg='whiteAlpha.900' p={8} borderRadius={4}>
 			<Heading as='h2' size='lg' isTruncated mb={4}>
-				Users ( Advance Table With Actions)
+				Users
 			</Heading>
 
 			{/* filter search bar*/}
 
 			<FilterSearchBar filter={globalFilter} setFilter={setGlobalFilter} />
 
-			<pre>
+			{/* <pre>
 				<code>
 					{JSON.stringify(
 						{
@@ -216,7 +216,7 @@ const AdvanceTable = ({ TABLE_HEADER_COLUMNS, TABLE_DATA_SAMPLES }) => {
 						2
 					)}
 				</code>
-			</pre>
+			</pre> */}
 
 			{/* STARTING TABLE */}
 			<Flex overflowX='auto'>

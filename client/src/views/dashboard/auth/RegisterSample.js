@@ -71,10 +71,10 @@ const RegisterSample = () => {
 	];
 
 	const onSubmit = async (values, { setSubmitting }) => {
-		const firstName = values?.firstName.trim() || '';
-		const lastName = values?.lastName.trim() || '';
-		const email = values?.email.trim() || '';
-		const password = values?.password.trim() || '';
+		// const firstName = values?.firstName.trim() || '';
+		// const lastName = values?.lastName.trim() || '';
+		// const email = values?.email.trim() || '';
+		// const password = values?.password.trim() || '';
 	};
 
 	return (

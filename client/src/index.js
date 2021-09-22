@@ -8,12 +8,19 @@ import { ChakraProvider, CSSReset } from '@chakra-ui/react';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import './index.css';
-
 import 'focus-visible/dist/focus-visible';
+
+// fonts
+import '@fontsource/raleway/400.css';
+import '@fontsource/raleway/600.css';
+import '@fontsource/raleway/700.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import customTheme from './styles/customTheme';
+import customTheme from './styles/theme';
 
 import { store, persistor } from './redux/store';
 import SkeletonLoading from './components/loading/SkeletonLoading';

@@ -5,7 +5,7 @@ const LINK_ITEMS = [
 	{
 		label: 'Home',
 		icon: FiHome,
-		to: '/',
+		to: '/dashboard',
 	},
 	{
 		label: 'Pages',
