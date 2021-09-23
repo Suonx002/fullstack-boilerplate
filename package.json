@@ -10,7 +10,10 @@
     "knex:migrate": "knex migrate:latest --knexfile ./knexfile.js",
     "knex:rollback": "knex migrate:rollback --knexfile ./knexfile.js",
     "knex:seed": "knex seed:run --knexfile ./knexfile.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prod": "NODE_ENV=production nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+
   },
   "keywords": [],
   "author": "",
