@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const morgan = require('morgan');
 
 const dotenv = require('dotenv').config({
 	path: path.resolve(__dirname + '/configs.env'),
@@ -22,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV !== 'production') {
+	const morgan = require('morgan');
 	app.use(morgan('tiny'));
 }
 
