@@ -26,7 +26,11 @@ import { store, persistor } from './redux/store';
 import SkeletonLoading from './components/loading/SkeletonLoading';
 import setAuthToken from './utils/setAuthToken';
 
-axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+if (process.env.NODE_ENV === 'production') {
+	axios.defaults.baseURL = process.env.REACT_APP_PROD_BASE_URL;
+} else {
+	axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+}
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
