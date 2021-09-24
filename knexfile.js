@@ -40,7 +40,10 @@ module.exports = {
 	},
 	production: {
 		client: process.env.PROD_DB_CLIENT,
-		connection: process.env.PROD_DATABASE_URL,
+		connection: {
+			connectionString: process.env.PROD_DATABASE_URL,
+			ssl: { rejectUnauthorized: false },
+		},
 		pool: {
 			min: 2,
 			max: 18,
