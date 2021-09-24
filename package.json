@@ -12,7 +12,7 @@
     "knex:rollback": "knex migrate:rollback --knexfile ./knexfile.js",
     "knex:seed": "knex seed:run --knexfile ./knexfile.js",
     "start": "node server.js",
-    "client-prod": "concurrently \"set NODE_ENV=production && npm run server \" \"&& npm run client-side\"",
+    "client-prod": "concurrently \"npm run server \" \"&& npm run client-side\"",
     "prod": "NODE_ENV=production nodemon server.js",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
 
