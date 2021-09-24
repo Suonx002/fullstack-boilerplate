@@ -1,21 +1,21 @@
 const nodemailer = require('nodemailer');
-const mg = require('nodemailer-mailgun-transport');
+// const mg = require('nodemailer-mailgun-transport');
+const sg = require('nodemailer-sendgrid-transport');
 
 // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
 const auth = {
 	auth: {
-		api_key: process.env.MAILGUN_API_KEY,
-		domain: process.env.MAILGUN_DOMAIN,
+		api_key: process.env.SENDGRID_API_KEY,
 	},
 };
 
-const nodemailerMailgun = nodemailer.createTransport(mg(auth));
+const nodemailerSendGrid = nodemailer.createTransport(sg(auth));
 
 const sendEmail = async ({ from, to, subject, html }) => {
 	let defaultFrom =
 		from || `${process.env.COMPANY_NAME} <${process.env.COMPANY_EMAIL}>`;
 
-	await nodemailerMailgun.sendMail({
+	await nodemailerSendGrid.sendMail({
 		from: defaultFrom,
 		to,
 		subject,
