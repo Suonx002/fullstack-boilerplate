@@ -5,7 +5,8 @@ const sg = require('nodemailer-sendgrid-transport');
 // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
 const auth = {
 	auth: {
-		api_key: process.env.SENDGRID_API_KEY,
+		api_user: process.env.SENDGRID_USERNAME,
+		api_key: process.env.SENDGRID_PASSWORD,
 	},
 };
 
